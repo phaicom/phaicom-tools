@@ -1,29 +1,48 @@
 {
-  "name": "phaicom-tools",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "react-router build",
-    "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
-  },
-  "dependencies": {
-    "@react-router/node": "7.14.0",
-    "@react-router/serve": "7.14.0",
-    "isbot": "^5.1.36",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-router": "7.14.0"
-  },
-  "devDependencies": {
-    "@react-router/dev": "7.14.0",
-    "@tailwindcss/vite": "^4.2.2",
-    "@types/node": "^22",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "tailwindcss": "^4.2.2",
-    "typescript": "^5.9.3",
-    "vite": "^8.0.3"
-  }
+	"name": "phaicom-tools",
+	"private": true,
+	"license": "MIT",
+	"author": "Reawpai Chunsoi <reawpai.chunsoi@gmail.com>",
+	"type": "module",
+	"packageManager": "bun@1.3.12",
+	"scripts": {
+		"build": "react-router build",
+		"dev": "react-router dev",
+		"start": "react-router-serve ./build/server/index.js",
+		"typecheck": "react-router typegen && tsc",
+		"fmt": "biome format --write .",
+		"fmt:check": "biome format .",
+		"lint": "biome lint .",
+		"lint:fix": "biome check --write .",
+		"postinstall": "bunx --bun simple-git-hooks"
+	},
+	"dependencies": {
+		"@react-router/node": "7.14.0",
+		"@react-router/serve": "7.14.0",
+		"isbot": "^5.1.37",
+		"react": "^19.2.5",
+		"react-dom": "^19.2.5",
+		"react-router": "7.14.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.11",
+		"@react-router/dev": "7.14.0",
+		"@tailwindcss/vite": "^4.2.2",
+		"@types/node": "^24.12.2",
+		"@types/react": "^19.2.14",
+		"@types/react-dom": "^19.2.3",
+		"lint-staged": "^16.4.0",
+		"simple-git-hooks": "^2.13.1",
+		"tailwindcss": "^4.2.2",
+		"typescript": "^6.0.2",
+		"vite": "^8.0.8"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "bunx --bun lint-staged"
+	},
+	"lint-staged": {
+		"**/*.{js,jsx,ts,tsx,json,jsonc,css}": [
+			"biome check --write"
+		]
+	}
 }
