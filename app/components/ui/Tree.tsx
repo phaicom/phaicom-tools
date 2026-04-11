@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import type { TreeItemProps as AriaTreeItemProps, TreeProps } from "react-aria-components";
 
 import {
@@ -15,11 +16,11 @@ import { composeTailwindRenderProps, focusRing } from "@/lib/react-aria-utils";
 
 const itemStyles = tv({
   extend: focusRing,
-  base: "group relative flex cursor-default gap-3 border-t border-transparent bg-white px-3 py-1 font-sans text-sm text-neutral-900 -outline-offset-2 select-none first:rounded-t-lg first:border-t-0 last:rounded-b-lg dark:border-t-neutral-700 dark:bg-neutral-900 dark:text-neutral-200",
+  base: "group relative flex gap-3 border-t border-transparent px-3 py-1 font-sans text-sm -outline-offset-2 select-none first:rounded-t-lg first:border-t-0 last:rounded-b-lg",
   variants: {
     isSelected: {
       false:
-        "hover:bg-neutral-100 dark:hover:bg-neutral-800 pressed:bg-neutral-100 dark:pressed:bg-neutral-800",
+        "hover:bg-neutral-100/80 dark:hover:bg-neutral-800/80 pressed:bg-neutral-100 dark:pressed:bg-neutral-800",
       true: "z-20 border-y-blue-200 bg-blue-100 hover:bg-blue-200 dark:border-y-blue-900 dark:bg-blue-700/30 dark:hover:bg-blue-700/40 pressed:bg-blue-200 dark:pressed:bg-blue-700/40",
     },
     isDisabled: {
@@ -32,10 +33,7 @@ export function Tree<T extends object>({ children, ...props }: TreeProps<T>) {
   return (
     <AriaTree
       {...props}
-      className={composeTailwindRenderProps(
-        props.className,
-        "w-48 max-w-full overflow-auto relative border border-neutral-200 dark:border-neutral-700 rounded-lg",
-      )}
+      className={composeTailwindRenderProps(props.className, "relative max-w-full overflow-auto")}
     >
       {children}
     </AriaTree>
@@ -65,15 +63,18 @@ const chevron = tv({
 });
 
 export interface TreeItemProps extends Partial<AriaTreeItemProps> {
+  content?: ReactNode;
   title: string;
 }
 
 export function TreeItem(props: TreeItemProps) {
+  const { children, content, ...itemProps } = props;
+
   return (
-    <AriaTreeItem className={itemStyles} textValue={props.title} {...props}>
-      <AriaTreeItemContent {...props}>
+    <AriaTreeItem className={itemStyles} textValue={props.title} {...itemProps}>
+      <AriaTreeItemContent>
         {({ selectionMode, selectionBehavior, hasChildItems, isExpanded, isDisabled }) => (
-          <div className={`flex items-center`}>
+          <div className="flex items-center">
             {selectionMode !== "none" && selectionBehavior === "toggle" && (
               <Checkbox slot="selection" />
             )}
@@ -85,11 +86,11 @@ export function TreeItem(props: TreeItemProps) {
             ) : (
               <div className="h-8 w-8 shrink-0" />
             )}
-            {props.title}
+            {content ?? props.title}
           </div>
         )}
       </AriaTreeItemContent>
-      {props.children}
+      {children}
     </AriaTreeItem>
   );
 }
