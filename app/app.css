@@ -250,12 +250,12 @@ body {
   }
 
   .hemp-icon {
-    color: #14532d;
     animation: hempIdle 3s ease-in-out infinite;
     transition: all 0.2s ease;
   }
 
   .hemp-icon:hover {
+    color: #14532d;
     animation:
       rainbowIcon 2.2s linear infinite,
       hempHoverFloat 1.8s ease-in-out infinite,

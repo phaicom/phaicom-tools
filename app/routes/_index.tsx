@@ -29,6 +29,7 @@ export default function Home() {
 
         <Button
           className="w-full cursor-pointer md:max-w-[320px]"
+          variant="primary"
           onClick={() => navigate("/docs")}
         >
           Get Started
