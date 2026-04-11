@@ -28,7 +28,7 @@ export default function Home() {
         </p>
 
         <Button
-          className="w-full cursor-pointer sm:max-w-[320px]"
+          className="w-full cursor-pointer md:max-w-[320px]"
           onClick={() => navigate("/docs")}
         >
           Get Started
@@ -36,7 +36,7 @@ export default function Home() {
       </div>
 
       {/* Tech Icons */}
-      <div className="mx-auto flex flex-row justify-center gap-2">
+      <div className="mx-auto flex flex-row justify-center gap-4">
         {[SiReact, SiTypescript, SiTailwindcss].map((Icon) => (
           <Icon key={Icon.name} className="size-8" />
         ))}
