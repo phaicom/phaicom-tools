@@ -2,6 +2,20 @@ function collapseWhitespace(input: string) {
   return input.trim().replace(/\s+/g, " ");
 }
 
+function extractGradientValue(css: string) {
+  const trimmed = css.trim().replace(/;$/, "");
+
+  if (/^(?:linear|radial)-gradient\(/i.test(trimmed)) {
+    return trimmed;
+  }
+
+  const declarationMatch = trimmed.match(
+    /^(?:background|background-image)\s*:\s*((?:linear|radial)-gradient\([\s\S]*\))$/i,
+  );
+
+  return declarationMatch?.[1] ?? null;
+}
+
 function normalizeGradientValue(css: string) {
   return collapseWhitespace(css)
     .replace(/\s*,\s*/g, ",")
@@ -12,13 +26,13 @@ function normalizeGradientValue(css: string) {
 }
 
 export function toTailwindGradientArbitraryValue(css: string) {
-  const trimmed = css.trim();
+  const extracted = extractGradientValue(css);
 
-  if (!/^(?:linear|radial)-gradient\(/i.test(trimmed) || !trimmed.endsWith(")")) {
+  if (!extracted || !extracted.endsWith(")")) {
     return null;
   }
 
-  const normalized = normalizeGradientValue(trimmed);
+  const normalized = normalizeGradientValue(extracted);
 
   return normalized.length > 0 ? normalized : null;
 }

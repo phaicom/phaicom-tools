@@ -43,14 +43,14 @@ const modeContent: Record<
 > = {
   "gradient-bg": {
     description: "Keep the gradient as a background utility.",
-    placeholder: "linear-gradient(90deg, #ff0000 0%, #00ff00 100%)",
-    helper: "Use a complete gradient value.",
+    placeholder: "background: linear-gradient(135deg, #80F1A6 0%, #EFD000 100%);",
+    helper: "Paste a gradient value or a full background declaration.",
     outputHint: "Background class",
   },
   "gradient-text": {
     description: "Create a text gradient utility string.",
-    placeholder: "linear-gradient(90deg, #ec4899 0%, #f59e0b 100%)",
-    helper: "Adds text clipping and transparency.",
+    placeholder: "background: linear-gradient(90deg, #ec4899 0%, #f59e0b 100%);",
+    helper: "Also works with full CSS background declarations.",
     outputHint: "Text gradient classes",
   },
 };
@@ -84,6 +84,10 @@ export default function GradientToTailwindDocsPage() {
 
   function runConversion(nextMode = mode, nextInput = input) {
     const trimmedInput = nextInput.trim();
+
+    if (trimmedInput !== nextInput) {
+      setInput(trimmedInput);
+    }
 
     if (!trimmedInput) {
       setOutput("");
