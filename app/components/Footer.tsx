@@ -1,12 +1,16 @@
 export const Footer = () => {
   return (
     <footer className="mt-auto flex h-14 items-center justify-center px-4">
-      <p>
-        &copy; 2026{" "}
-        <a href="https://github.com/phaicom" target="_blank" rel="noopener noreferrer">
+      <p className="text-sm text-muted-foreground">
+        Made with <span className="text-red-500">♥</span> by{" "}
+        <a
+          href="https://github.com/phaicom"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-4 transition hover:text-foreground"
+        >
           Phaicom
         </a>
-        . All rights reserved.
       </p>
     </footer>
   );
