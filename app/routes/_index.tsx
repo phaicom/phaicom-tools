@@ -14,7 +14,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <main className="flex flex-col items-center pt-16 pb-4">
+    <main className="flex flex-col items-center pt-10 pb-4 md:pt-16 lg:pt-32">
       <div className="flex w-full flex-col gap-6 px-7 pb-8 md:items-center md:px-10 md:text-center">
         <h1 className="text-5xl sm:text-7xl">
           Build faster with <br />
