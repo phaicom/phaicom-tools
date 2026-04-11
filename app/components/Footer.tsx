@@ -1,8 +1,12 @@
+import { HempConfetti } from "@/components/HempConfetti";
+
 export const Footer = () => {
   return (
     <footer className="mt-auto flex h-14 items-center justify-center px-4">
-      <p className="text-sm text-muted-foreground">
-        Made with <span className="text-red-500">♥</span> by{" "}
+      <p className="flex flex-row items-center gap-1 text-sm text-muted-foreground">
+        Made with
+        <HempConfetti />
+        by
         <a
           href="https://github.com/phaicom"
           target="_blank"

@@ -46,7 +46,7 @@ export const HempConfetti = () => {
   return (
     <GiHemp
       onClick={shoot}
-      className="hemp-icon size-8 cursor-pointer transition select-none hover:rotate-6 active:scale-90"
+      className="hemp-icon size-4 cursor-pointer transition select-none hover:rotate-6 active:scale-90"
     />
   );
 };
