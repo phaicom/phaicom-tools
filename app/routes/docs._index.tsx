@@ -13,7 +13,7 @@ export default function DocsIndex() {
           Phaicom Tools
         </p>
         <h1>Docs</h1>
-        <p className="max-w-2xl text-muted-foreground">
+        <p className="max-w-3xl text-muted-foreground">
           Simple, practical documentation for tools you actually use. Learn what each tool does, how
           to use it, and how it fits into your daily workflow.
         </p>
