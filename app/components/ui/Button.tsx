@@ -60,7 +60,7 @@ export function Button(props: ButtonProps) {
 							aria-hidden
 							className="flex absolute inset-0 justify-center items-center"
 						>
-							{/** biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+							{/** biome-ignore lint/a11y/noSvgWithoutTitle: spinner icon, title not needed */}
 							<svg
 								className="w-4 h-4 text-white animate-spin"
 								viewBox="0 0 24 24"
