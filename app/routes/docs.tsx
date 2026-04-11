@@ -19,12 +19,10 @@ export default function Docs() {
         <DocsSidebar pathname={location.pathname} />
 
         <section className="min-w-0">
-          <div className="md:pr-6">
-            <DocsBreadcrumbs pathname={location.pathname} />
+          <DocsBreadcrumbs pathname={location.pathname} />
 
-            <div className="mt-6">
-              <Outlet />
-            </div>
+          <div className="mt-6">
+            <Outlet />
           </div>
         </section>
       </div>
