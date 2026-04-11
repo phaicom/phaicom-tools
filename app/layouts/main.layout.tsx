@@ -1,6 +1,7 @@
 import { useLocale } from "react-aria-components";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 
+import { ConsoleEasterEgg } from "@/components/ConsoleEasterEgg";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
@@ -16,6 +17,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="flex min-h-svh flex-col">
+        <ConsoleEasterEgg />
         <Header />
         {children}
         <Footer />
