@@ -1,0 +1,61 @@
+"use client";
+import type { MeterProps as AriaMeterProps } from "react-aria-components";
+
+import { Meter as AriaMeter } from "react-aria-components";
+import { LuTriangleAlert } from "react-icons/lu";
+
+import { Label } from "@/components/ui/Field";
+import { composeTailwindRenderProps } from "@/lib/react-aria-utils";
+
+export interface MeterProps extends AriaMeterProps {
+  label?: string;
+}
+
+export function Meter({ label, ...props }: MeterProps) {
+  return (
+    <AriaMeter
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        "flex flex-col gap-2 font-sans max-w-full",
+      )}
+    >
+      {({ percentage, valueText }) => (
+        <>
+          <div className="flex justify-between gap-2">
+            <Label>{label}</Label>
+            <span
+              className={`text-sm ${percentage >= 80 ? "text-red-600 dark:text-red-500" : "text-neutral-600 dark:text-neutral-400"}`}
+            >
+              {percentage >= 80 && (
+                <LuTriangleAlert
+                  aria-label="Alert"
+                  className="inline-block h-4 w-4 align-text-bottom"
+                />
+              )}
+              {" " + valueText}
+            </span>
+          </div>
+          <div className="relative h-2 w-64 max-w-full rounded-full bg-neutral-300 outline -outline-offset-1 outline-transparent dark:bg-neutral-700">
+            <div
+              className={`absolute top-0 left-0 h-full rounded-full ${getColor(percentage)} forced-colors:bg-[Highlight]`}
+              style={{ width: percentage + "%" }}
+            />
+          </div>
+        </>
+      )}
+    </AriaMeter>
+  );
+}
+
+function getColor(percentage: number) {
+  if (percentage < 70) {
+    return "bg-green-600";
+  }
+
+  if (percentage < 80) {
+    return "bg-orange-500";
+  }
+
+  return "bg-red-600";
+}
