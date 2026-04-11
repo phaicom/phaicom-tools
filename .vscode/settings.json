@@ -1,9 +1,25 @@
 {
-	"biome.enabled": true,
-	"editor.defaultFormatter": "biomejs.biome",
-	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
-		"source.organizeImports.biome": "explicit",
-		"source.fixAll.biome": "explicit"
-	}
+  // Disable the default formatter, use eslint instead
+  "prettier.enable": false,
+
+  // Auto fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.fixAll.oxc": "always"
+  },
+  "oxc.typeAware": true,
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.classAttributes": ["class", "ui", "className"],
+  "tailwindCSS.experimental.classRegex": [["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]]
 }
