@@ -14,35 +14,59 @@ export interface ButtonProps extends RACButtonProps {
   variant?: "primary" | "secondary" | "destructive" | "quiet";
 }
 
-const button = tv({
+export const button = tv({
   extend: focusRing,
-  base: "relative box-border inline-flex h-9 cursor-default items-center justify-center gap-2 rounded-lg border border-transparent px-3.5 py-0 text-center font-sans text-sm transition [-webkit-tap-highlight-color:transparent] dark:border-white/10 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 [&:has(>svg:only-child)]:px-0",
+  base: "relative box-border inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-0 text-center font-sans text-sm font-medium whitespace-nowrap transition-[background-color,border-color,color,transform,opacity] duration-200 ease-out outline-none select-none [-webkit-tap-highlight-color:transparent] disabled:pointer-events-none pressed:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&:has(>svg:only-child)]:h-9 [&:has(>svg:only-child)]:w-9 [&:has(>svg:only-child)]:px-0",
   variants: {
     variant: {
-      primary: "bg-blue-600 text-white hover:bg-blue-700 pressed:bg-blue-800",
+      primary:
+        "border-primary/35 bg-primary text-primary-foreground hover:border-primary/40 hover:bg-primary/90 pressed:bg-primary/80",
+
       secondary:
-        "border-black/10 bg-neutral-50 text-neutral-800 hover:bg-neutral-100 dark:bg-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-600 pressed:bg-neutral-200 dark:pressed:bg-neutral-500",
-      destructive: "bg-red-700 text-white hover:bg-red-800 pressed:bg-red-900",
+        "border-border bg-secondary text-secondary-foreground hover:border-primary/20 hover:bg-secondary/90 pressed:bg-secondary/80",
+
+      destructive:
+        "border-destructive/40 bg-destructive text-white hover:bg-destructive/90 pressed:bg-destructive/80",
+
       quiet:
-        "border-0 bg-transparent text-neutral-800 hover:bg-neutral-200 dark:text-neutral-100 dark:hover:bg-neutral-700 pressed:bg-neutral-300 dark:pressed:bg-neutral-600",
+        "border-transparent bg-transparent text-foreground/80 hover:bg-accent/60 hover:text-accent-foreground pressed:bg-accent",
     },
+
     isDisabled: {
-      true: "border-transparent bg-neutral-100 text-neutral-300 dark:border-transparent dark:bg-neutral-800 dark:text-neutral-600 forced-colors:text-[GrayText]",
+      true: "border-transparent bg-muted text-muted-foreground/50 opacity-60 dark:bg-muted/80 dark:text-muted-foreground/40",
     },
+
     isPending: {
-      true: "text-transparent",
+      true: "text-transparent opacity-70",
     },
   },
-  defaultVariants: {
-    variant: "primary",
-  },
+
   compoundVariants: [
     {
       variant: "quiet",
       isDisabled: true,
       class: "bg-transparent dark:bg-transparent",
     },
+    {
+      variant: "primary",
+      isDisabled: true,
+      class: "border-primary/15 bg-primary/40 text-primary-foreground/60",
+    },
+    {
+      variant: "secondary",
+      isDisabled: true,
+      class: "border-border/40 bg-secondary/50",
+    },
+    {
+      variant: "destructive",
+      isDisabled: true,
+      class: "border-destructive/20 bg-destructive/40 text-white/60",
+    },
   ],
+
+  defaultVariants: {
+    variant: "primary",
+  },
 });
 
 export function Button(props: ButtonProps) {
@@ -50,22 +74,25 @@ export function Button(props: ButtonProps) {
     <RACButton
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
-        button({ ...renderProps, variant: props.variant, className }),
+        button({
+          ...renderProps,
+          variant: props.variant,
+          className,
+        }),
       )}
     >
       {composeRenderProps(props.children, (children, { isPending }) => (
         <>
           {children}
           {isPending && (
-            <span aria-hidden className="absolute inset-0 flex items-center justify-center">
-              {/** biome-ignore lint/a11y/noSvgWithoutTitle: spinner icon, title not needed */}
+            <span className="absolute inset-0 flex items-center justify-center">
               <svg
-                className="h-4 w-4 animate-spin text-white"
+                className="size-4 animate-spin"
                 viewBox="0 0 24 24"
                 stroke={
                   props.variant === "secondary" || props.variant === "quiet"
-                    ? "light-dark(black, white)"
-                    : "white"
+                    ? "var(--foreground)"
+                    : "var(--primary-foreground)"
                 }
               >
                 <circle cx="12" cy="12" r="10" strokeWidth="4" fill="none" className="opacity-25" />

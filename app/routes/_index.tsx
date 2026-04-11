@@ -1,22 +1,25 @@
 import { SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
-import { Button } from "@/components/ui/Button";
+import { button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 export function meta() {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Phaicom Tools" },
+    {
+      name: "description",
+      content:
+        "Beautiful developer utilities for daily work, from image conversion to CSS and Tailwind helpers.",
+    },
   ];
 }
 
 export default function Home() {
-  const navigate = useNavigate();
-
   return (
-    <main className="flex flex-col items-center pt-10 pb-4 md:pt-16 lg:pt-32">
-      <div className="flex w-full flex-col gap-6 px-7 pb-8 md:items-center md:px-10 md:text-center">
-        <h1 className="text-5xl sm:text-7xl">
+    <main className="starfield flex flex-col items-center justify-center px-4 pt-10 pb-4 md:px-6">
+      <div className="flex w-full max-w-3xl flex-col gap-6 md:items-center md:text-center">
+        <h1 className="text-galaxy text-5xl font-semibold tracking-tight sm:text-7xl">
           Build faster with <br />
           Phaicom Tools
         </h1>
@@ -27,19 +30,21 @@ export default function Home() {
           building great products.
         </p>
 
-        <Button
-          className="w-full cursor-pointer md:max-w-[320px]"
-          variant="primary"
-          onClick={() => navigate("/docs")}
+        <Link
+          to="/docs"
+          className={cn(button({ variant: "primary" }), "w-full no-underline md:max-w-[320px]")}
         >
           Get Started
-        </Button>
+        </Link>
       </div>
 
       {/* Tech Icons */}
-      <div className="mx-auto flex flex-row justify-center gap-4">
+      <div className="mt-10 flex flex-row justify-center gap-6">
         {[SiReact, SiTypescript, SiTailwindcss].map((Icon) => (
-          <Icon key={Icon.name} className="size-8" />
+          <Icon
+            key={Icon.name}
+            className="size-8 text-foreground/60 transition-all duration-300 hover:scale-110 hover:text-primary"
+          />
         ))}
       </div>
     </main>
