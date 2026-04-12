@@ -23,7 +23,7 @@ export function ResultActions({
       <Button
         onPress={onConvert}
         isDisabled={!canConvert}
-        className="h-10 min-w-0 flex-1 rounded-xl px-4 sm:min-w-28 sm:flex-none"
+        className="h-10 min-w-0 flex-1 rounded-sm px-4 sm:min-w-28 sm:flex-none"
       >
         <span className="flex flex-row items-center gap-2">
           <LuRefreshCcw />
@@ -37,7 +37,7 @@ export function ResultActions({
         isDisabled={!canCopy}
         className={({ isDisabled }) =>
           cn(
-            "h-10 min-w-0 flex-1 rounded-xl px-4 sm:min-w-24 sm:flex-none",
+            "h-10 min-w-0 flex-1 rounded-sm px-4 sm:min-w-24 sm:flex-none",
             copied && !isDisabled && "border-emerald-500/30 bg-emerald-500/10",
           )
         }

@@ -59,13 +59,13 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius-sm);
+  --radius-lg: var(--radius-sm);
+  --radius-xl: var(--radius-sm);
+  --radius-2xl: var(--radius-sm);
+  --radius-3xl: var(--radius-sm);
+  --radius-4xl: var(--radius-sm);
 }
 
 :root {
@@ -102,7 +102,7 @@
   --chart-4: oklch(0.8 0.12 240);
   --chart-5: oklch(0.7 0.14 20);
 
-  --radius: 0.875rem;
+  --radius: 0.5rem;
 
   --sidebar: oklch(0.97 0.012 300);
   --sidebar-foreground: oklch(0.25 0.03 285);
@@ -256,7 +256,7 @@ body {
   }
 
   .prose-surface .rounded-callout {
-    @apply rounded-2xl border border-primary/20 bg-accent/45 px-4 py-3;
+    @apply rounded-sm border border-primary/20 bg-accent/45 px-4 py-3;
   }
 
   .markdown-editor-shell .mdxeditor-toolbar {
@@ -366,9 +366,7 @@ body {
   }
 
   .glow-primary {
-    box-shadow:
-      0 0 0 1px var(--glow-primary),
-      0 0 20px oklch(0.72 0.18 300 / 0.18);
+    box-shadow: 0 0 0 1px var(--glow-primary);
   }
 
   .glow-soft {

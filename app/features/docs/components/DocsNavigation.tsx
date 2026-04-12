@@ -42,7 +42,7 @@ function renderTreeItems(
         key={node.id}
         title={node.label}
         className={cn(
-          "rounded-lg border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none",
+          "rounded-sm border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none",
           node.path ? "cursor-pointer" : "cursor-default",
           isActive && "bg-sidebar-primary/12 text-sidebar-primary",
           !isActive && isBranchActive && "bg-sidebar-accent/55",
@@ -58,7 +58,7 @@ function renderTreeItems(
         content={
           <div
             className={cn(
-              "flex min-w-0 flex-1 items-center rounded-lg pr-2 text-sm",
+              "flex min-w-0 flex-1 items-center rounded-sm pr-2 text-sm",
               hasChildren ? "font-semibold tracking-tight" : "font-medium",
               isActive
                 ? "text-sidebar-primary"
@@ -103,7 +103,7 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
           <TreeItem
             title={docsNavigation.overview.label}
             className={cn(
-              "cursor-pointer rounded-lg border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none",
+              "cursor-pointer rounded-sm border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none",
               pathname === docsNavigation.overview.path &&
                 "bg-sidebar-primary/12 text-sidebar-primary",
             )}
@@ -114,7 +114,7 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
             content={
               <div
                 className={cn(
-                  "flex min-w-0 flex-1 items-center rounded-lg pr-2 text-sm font-medium",
+                  "flex min-w-0 flex-1 items-center rounded-sm pr-2 text-sm font-medium",
                   pathname === docsNavigation.overview.path
                     ? "text-sidebar-primary"
                     : "text-sidebar-foreground/80",

@@ -33,7 +33,7 @@ export function ConverterModeTabs({ mode, onChange, actions, children }: Convert
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <TabList
           aria-label="Converter mode"
-          className="flex w-full items-center gap-2 rounded-2xl bg-secondary p-1.5 md:max-w-140"
+          className="flex w-full items-center gap-2 rounded-sm bg-secondary p-1.5 md:max-w-140"
         >
           {modeOptions.map((option) => (
             <ModeTab key={option.id} id={option.id} label={option.label} />
@@ -58,9 +58,9 @@ function ModeTab({ id, label }: { id: TabsProps["selectedKey"]; label: string })
       id={id}
       className={({ isFocusVisible, isHovered, isPressed, isSelected }) =>
         cn(
-          "flex w-full flex-1 cursor-pointer items-center justify-center rounded-xl px-4 py-3 text-center transition outline-none select-none",
+          "flex w-full flex-1 cursor-pointer items-center justify-center rounded-sm px-4 py-3 text-center transition outline-none select-none",
           isSelected
-            ? "bg-background text-foreground shadow-[0_(15,23,42,01px_2px_rgba.06),0_6px_16px_rgba(15,23,42,0.06)]"
+            ? "bg-background text-foreground shadow-xs"
             : "bg-transparent text-muted-foreground",
           !isSelected && "mx-0.5",
           !isSelected && isHovered && "bg-muted/50 text-foreground",

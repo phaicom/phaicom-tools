@@ -39,7 +39,7 @@ export function Table(props: TableProps) {
     <ResizableTableContainer
       onScroll={props.onScroll}
       className={cn(
-        "relative box-border max-h-80 w-full scroll-pt-[2.281rem] overflow-auto rounded-lg border border-neutral-300 bg-white font-sans dark:border-neutral-700 dark:bg-neutral-900",
+        "relative box-border max-h-80 w-full scroll-pt-[2.281rem] overflow-auto rounded-sm border border-neutral-300 bg-white font-sans dark:border-neutral-700 dark:bg-neutral-900",
         props.className,
       )}
     >
@@ -104,7 +104,7 @@ export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "sticky top-0 z-10 bg-neutral-100/60 dark:bg-neutral-700/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 dark:supports-[-moz-appearance:none]:bg-neutral-700 forced-colors:bg-[Canvas] rounded-t-lg border-b border-b-neutral-200 dark:border-b-neutral-700",
+        "sticky top-0 z-10 bg-neutral-100/60 dark:bg-neutral-700/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 dark:supports-[-moz-appearance:none]:bg-neutral-700 forced-colors:bg-[Canvas] rounded-t-sm border-b border-b-neutral-200 dark:border-b-neutral-700",
       )}
     >
       {/* Add extra columns for drag and drop and selection. */}
@@ -129,7 +129,7 @@ export function TableBody<T extends object>(props: TableBodyProps<T>) {
 
 const rowStyles = tv({
   extend: focusRing,
-  base: "group/row relative cursor-default text-sm text-neutral-900 -outline-offset-2 select-none last:rounded-b-lg hover:bg-neutral-100 disabled:text-neutral-300 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:disabled:text-neutral-600 pressed:bg-neutral-100 dark:pressed:bg-neutral-800 selected:bg-blue-100 selected:hover:bg-blue-200 dark:selected:bg-blue-700/30 dark:selected:hover:bg-blue-700/40 selected:pressed:bg-blue-200 dark:selected:pressed:bg-blue-700/40",
+  base: "group/row relative cursor-default text-sm text-neutral-900 -outline-offset-2 select-none last:rounded-b-sm hover:bg-neutral-100 disabled:text-neutral-300 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:disabled:text-neutral-600 pressed:bg-neutral-100 dark:pressed:bg-neutral-800 selected:bg-blue-100 selected:hover:bg-blue-200 dark:selected:bg-blue-700/30 dark:selected:hover:bg-blue-700/40 selected:pressed:bg-blue-200 dark:selected:pressed:bg-blue-700/40",
 });
 
 export function Row<T extends object>({ id, columns, children, ...otherProps }: RowProps<T>) {
@@ -154,7 +154,7 @@ export function Row<T extends object>({ id, columns, children, ...otherProps }: 
 
 const cellStyles = tv({
   extend: focusRing,
-  base: "box-border truncate border-b border-b-neutral-200 p-2 -outline-offset-2 [--selected-border:var(--color-blue-200)] [-webkit-tap-highlight-color:transparent] group-last/row:border-b-0 group-selected/row:border-(--selected-border) group-last/row:first:rounded-bl-lg group-last/row:last:rounded-br-lg dark:border-b-neutral-700 dark:[--selected-border:var(--color-blue-900)] [:is(:has(+[data-selected])_*)]:border-(--selected-border)",
+  base: "box-border truncate border-b border-b-neutral-200 p-2 -outline-offset-2 [--selected-border:var(--color-blue-200)] [-webkit-tap-highlight-color:transparent] group-last/row:border-b-0 group-selected/row:border-(--selected-border) group-last/row:first:rounded-bl-sm group-last/row:last:rounded-br-sm dark:border-b-neutral-700 dark:[--selected-border:var(--color-blue-900)] [:is(:has(+[data-selected])_*)]:border-(--selected-border)",
 });
 
 export function Cell(props: CellProps) {

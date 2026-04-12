@@ -19,7 +19,7 @@ import { composeTailwindRenderProps, focusRing } from "@/shared/utils/react-aria
 
 const styles = tv({
   extend: focusRing,
-  base: "flex h-9 w-full min-w-45 cursor-default items-center gap-4 rounded-lg border border-black/10 bg-neutral-50 pr-2 pl-3 text-start font-sans transition [-webkit-tap-highlight-color:transparent] dark:border-white/10 dark:bg-neutral-700",
+  base: "flex h-9 w-full min-w-45 cursor-default items-center gap-4 rounded-sm border border-black/10 bg-neutral-50 pr-2 pl-3 text-start font-sans transition [-webkit-tap-highlight-color:transparent] dark:border-white/10 dark:bg-neutral-700",
   variants: {
     isDisabled: {
       false:
@@ -71,7 +71,7 @@ export function Select<T extends object, M extends "single" | "multiple" = "sing
       <Popover className="min-w-(--trigger-width)">
         <ListBox
           items={items}
-          className="box-border max-h-[inherit] overflow-auto p-1 outline-hidden [clip-path:inset(0_0_0_0_round_.75rem)]"
+          className="box-border max-h-[inherit] overflow-auto p-1 outline-hidden [clip-path:inset(0_0_0_0_round_.5rem)]"
         >
           {children}
         </ListBox>

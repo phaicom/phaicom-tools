@@ -10,7 +10,7 @@ export interface TooltipProps extends Omit<AriaTooltipProps, "children"> {
 }
 
 const styles = tv({
-  base: "group box-border rounded-lg border border-neutral-800 bg-neutral-700 px-3 py-1.5 font-sans text-xs text-white drop-shadow-lg will-change-transform dark:border-white/10 dark:bg-neutral-600",
+  base: "group box-border rounded-sm border border-neutral-800 bg-neutral-700 px-3 py-1.5 font-sans text-xs text-white drop-shadow-none will-change-transform dark:border-white/10 dark:bg-neutral-600",
   variants: {
     isEntering: {
       true: "animate-in duration-200 ease-out fade-in placement-left:slide-in-from-right-0.5 placement-right:slide-in-from-left-0.5 placement-top:slide-in-from-bottom-0.5 placement-bottom:slide-in-from-top-0.5",

@@ -19,7 +19,7 @@ import { Button } from "@/shared/components/ui/Button";
 import { composeTailwindRenderProps } from "@/shared/utils/react-aria";
 
 const disclosure = tv({
-  base: "group min-w-50 rounded-lg font-sans text-neutral-900 dark:text-neutral-200",
+  base: "group min-w-50 rounded-sm font-sans text-neutral-900 dark:text-neutral-200",
 });
 
 const chevron = tv({

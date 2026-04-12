@@ -16,7 +16,7 @@ import { composeTailwindRenderProps, focusRing } from "@/shared/utils/react-aria
 
 const itemStyles = tv({
   extend: focusRing,
-  base: "group relative flex gap-3 border-t border-transparent px-3 py-1 font-sans text-sm -outline-offset-2 select-none first:rounded-t-lg first:border-t-0 last:rounded-b-lg",
+  base: "group relative flex gap-3 border-t border-transparent px-3 py-1 font-sans text-sm -outline-offset-2 select-none first:rounded-t-sm first:border-t-0 last:rounded-b-sm",
   variants: {
     isSelected: {
       false:
@@ -42,7 +42,7 @@ export function Tree<T extends object>({ children, ...props }: TreeProps<T>) {
 
 const expandButton = tv({
   extend: focusRing,
-  base: "flex h-8 w-8 shrink-0 cursor-default items-center justify-center rounded-lg border-0 bg-transparent p-0 text-start [-webkit-tap-highlight-color:transparent]",
+  base: "flex h-8 w-8 shrink-0 cursor-default items-center justify-center rounded-sm border-0 bg-transparent p-0 text-start [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
       true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]",

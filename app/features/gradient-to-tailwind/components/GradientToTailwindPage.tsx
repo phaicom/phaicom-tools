@@ -46,7 +46,7 @@ export function GradientToTailwindPage() {
         }
       >
         <section>
-          <div className="space-y-6 rounded-[1.75rem] bg-card/85 p-5 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur sm:p-6">
+          <div className="space-y-6 rounded-sm bg-card/85 p-5 shadow-xs backdrop-blur sm:p-6">
             <div className="space-y-1">
               <h2 className="text-lg font-semibold tracking-tight">Converter</h2>
               <p className="text-sm text-muted-foreground">{currentMode.description}</p>
@@ -102,7 +102,7 @@ function EditorField({
         spellCheck={false}
         className={({ isFocusVisible, isHovered }) =>
           cn(
-            "min-h-112 w-full resize-y rounded-[1.5rem] bg-background px-5 py-4 font-mono text-sm leading-7 text-foreground shadow-sm transition outline-none placeholder:text-muted-foreground/70",
+            "min-h-112 w-full resize-y rounded-sm bg-background px-5 py-4 font-mono text-sm leading-7 text-foreground shadow-none transition outline-none placeholder:text-muted-foreground/70",
             isHovered && "bg-card",
             isFocusVisible && "ring-2 ring-ring/20",
           )
@@ -134,7 +134,7 @@ function OutputPanel({
 
       <div
         className={cn(
-          "min-h-112 rounded-[1.5rem] bg-background px-5 py-4 font-mono text-sm leading-7 whitespace-pre-wrap shadow-sm",
+          "min-h-112 rounded-sm bg-background px-5 py-4 font-mono text-sm leading-7 whitespace-pre-wrap shadow-none",
           error ? "text-destructive" : "text-foreground",
         )}
       >

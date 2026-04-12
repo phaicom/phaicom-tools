@@ -102,7 +102,7 @@ export function MarkdownEditorPane({ markdown, onChange }: MarkdownEditorPanePro
       markdownShortcutPlugin(),
       toolbarPlugin({
         toolbarClassName:
-          "mdxeditor-toolbar rounded-t-[1.35rem] border-b border-border/70 bg-card/85 px-3 py-2 backdrop-blur",
+          "mdxeditor-toolbar rounded-t-sm border-b border-border/70 bg-card/85 px-3 py-2 backdrop-blur",
         toolbarContents: () => (
           <ConditionalContents
             options={[
@@ -141,7 +141,7 @@ export function MarkdownEditorPane({ markdown, onChange }: MarkdownEditorPanePro
     <Group
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
-      className="flex h-full min-h-[32rem] flex-col overflow-hidden rounded-[1.6rem] border border-border/70 bg-card/85 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur"
+      className="flex h-full min-h-[32rem] flex-col overflow-hidden rounded-sm border border-border/70 bg-card/85 shadow-xs backdrop-blur"
     >
       <div className="border-b border-border/70 px-5 py-4">
         <Heading id={titleId} className="text-base font-semibold tracking-tight">
@@ -151,7 +151,7 @@ export function MarkdownEditorPane({ markdown, onChange }: MarkdownEditorPanePro
 
       <div className="min-h-0 flex-1 bg-background/70 p-4">
         {isMounted ? (
-          <div className="markdown-editor-shell h-full min-h-[27rem] rounded-[1.35rem] border border-border/70 bg-background shadow-sm">
+          <div className="markdown-editor-shell h-full min-h-[27rem] rounded-sm border border-border/70 bg-background shadow-none">
             <MDXEditor
               ref={editorRef}
               markdown={markdown}
@@ -168,16 +168,16 @@ export function MarkdownEditorPane({ markdown, onChange }: MarkdownEditorPanePro
                 "markdown-editor-content prose-surface min-h-[23rem] px-5 py-4 text-sm text-foreground outline-none",
                 "[&_a]:text-primary [&_a]:underline-offset-4",
                 "[&_blockquote]:border-l-3 [&_blockquote]:border-primary/35 [&_blockquote]:pl-4 [&_blockquote]:text-muted-foreground",
-                "[&_code]:rounded-md [&_code]:bg-secondary [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[0.92em]",
-                "[&_pre]:overflow-x-auto [&_pre]:rounded-2xl [&_pre]:bg-foreground [&_pre]:p-4 [&_pre]:text-background",
-                "[&_table]:w-full [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-xl",
+                "[&_code]:rounded-xs [&_code]:bg-secondary [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[0.92em]",
+                "[&_pre]:overflow-x-auto [&_pre]:rounded-sm [&_pre]:bg-foreground [&_pre]:p-4 [&_pre]:text-background",
+                "[&_table]:w-full [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-sm",
                 "[&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-2 [&_th]:border [&_th]:border-border [&_th]:bg-secondary/80 [&_th]:px-3 [&_th]:py-2 [&_th]:text-left",
                 "[&_ol]:list-decimal [&_ul]:list-disc",
               )}
             />
           </div>
         ) : (
-          <div className="prose-surface h-full min-h-[27rem] overflow-auto rounded-[1.35rem] border border-border/70 bg-background px-5 py-4 text-sm text-muted-foreground shadow-sm">
+          <div className="prose-surface h-full min-h-[27rem] overflow-auto rounded-sm border border-border/70 bg-background px-5 py-4 text-sm text-muted-foreground shadow-none">
             <pre className="font-mono text-sm leading-7 whitespace-pre-wrap">{markdown}</pre>
           </div>
         )}

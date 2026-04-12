@@ -19,7 +19,7 @@ export default function DocsIndex() {
         </p>
       </div>
 
-      <div className="rounded-2xl border border-border/70 bg-background/70 p-5">
+      <div className="rounded-sm border border-border/70 bg-background/70 p-5">
         <h2 className="text-lg">Get Started</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Pick a tool from the sidebar and start exploring. Each page is short, focused, and built

@@ -26,7 +26,7 @@ export function ListBox<T extends object>({ children, ...props }: ListBoxProps<T
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "outline-0 p-1 w-50 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans",
+        "outline-0 p-1 w-50 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-sm font-sans",
       )}
     >
       {children}
@@ -36,7 +36,7 @@ export function ListBox<T extends object>({ children, ...props }: ListBoxProps<T
 
 export const itemStyles = tv({
   extend: focusRing,
-  base: "group relative flex cursor-default items-center gap-8 rounded-md px-2.5 py-1.5 text-sm will-change-transform forced-color-adjust-none select-none",
+  base: "group relative flex cursor-default items-center gap-8 rounded-xs px-2.5 py-1.5 text-sm will-change-transform forced-color-adjust-none select-none",
   variants: {
     isSelected: {
       false:
@@ -65,7 +65,7 @@ export function ListBoxItem(props: ListBoxItemProps) {
 }
 
 export const dropdownItemStyles = tv({
-  base: "group flex cursor-default items-center gap-4 rounded-lg py-2 pr-3 pl-3 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] selected:pr-1 [[href]]:cursor-pointer",
+  base: "group flex cursor-default items-center gap-4 rounded-sm py-2 pr-3 pl-3 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] selected:pr-1 [[href]]:cursor-pointer",
   variants: {
     isDisabled: {
       false: "text-neutral-900 dark:text-neutral-100",

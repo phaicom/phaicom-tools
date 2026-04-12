@@ -9,7 +9,7 @@ import { Label } from "@/shared/components/ui/Field";
 import { composeTailwindRenderProps } from "@/shared/utils/react-aria";
 
 const trackStyles = tv({
-  base: "group col-span-2 rounded-md",
+  base: "group col-span-2 rounded-xs",
   variants: {
     orientation: {
       horizontal: "h-6 w-full",

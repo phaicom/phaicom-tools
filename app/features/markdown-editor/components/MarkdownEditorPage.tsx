@@ -27,7 +27,7 @@ export function MarkdownEditorPage() {
 
         <Group
           aria-label="Markdown editor actions"
-          className="rounded-[1.4rem] border border-border/70 bg-card/80 p-3 shadow-[0_16px_50px_rgba(15,23,42,0.05)] backdrop-blur"
+          className="rounded-sm border border-border/70 bg-card/80 p-3 shadow-xs backdrop-blur"
         >
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-end">
             <Toolbar aria-label="Document actions" className="w-full md:w-auto md:justify-end">
@@ -36,7 +36,7 @@ export function MarkdownEditorPage() {
                 onPress={() => void copyMarkdown()}
                 className={({ isDisabled }) =>
                   cn(
-                    "h-10 min-w-0 flex-1 rounded-xl px-4 md:min-w-36 md:flex-none",
+                    "h-10 min-w-0 flex-1 rounded-sm px-4 md:min-w-36 md:flex-none",
                     copied && !isDisabled && "border-emerald-500/30 bg-emerald-500/10",
                   )
                 }
@@ -50,7 +50,7 @@ export function MarkdownEditorPage() {
               <Button
                 variant="quiet"
                 onPress={resetMarkdown}
-                className="h-10 min-w-0 flex-1 rounded-xl px-4 md:min-w-32 md:flex-none"
+                className="h-10 min-w-0 flex-1 rounded-sm px-4 md:min-w-32 md:flex-none"
               >
                 <span className="flex items-center gap-2">
                   <LuRotateCcw />

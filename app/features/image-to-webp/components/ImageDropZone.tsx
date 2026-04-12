@@ -59,7 +59,7 @@ export function ImageDropZone({ disabled = false, onAddFiles }: ImageDropZonePro
       aria-label="Upload images to convert to WebP"
       className={({ isDropTarget, isFocusVisible }) =>
         cn(
-          "min-h-68 w-full rounded-2xl border border-dashed border-border/70 bg-background p-6 text-left transition md:p-7",
+          "min-h-68 w-full rounded-sm border border-dashed border-border/70 bg-background p-6 text-left transition md:p-7",
           isDropTarget && "border-primary/60 bg-primary/4",
           isFocusVisible && "ring-2 ring-primary/20 ring-offset-2 ring-offset-background",
           disabled && "opacity-70",
@@ -69,7 +69,7 @@ export function ImageDropZone({ disabled = false, onAddFiles }: ImageDropZonePro
       <div className="flex h-full flex-col justify-between gap-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div className="flex items-start gap-4">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-sm bg-secondary text-primary">
               <LuImages className="size-6" aria-hidden />
             </div>
 

@@ -8,7 +8,7 @@ import { focusRing } from "@/shared/utils/react-aria";
 
 let styles = tv({
   extend: focusRing,
-  base: "relative box-border inline-flex h-9 cursor-default items-center justify-center gap-2 rounded-lg border border-black/10 px-3.5 text-center font-sans text-sm transition forced-color-adjust-none [-webkit-tap-highlight-color:transparent] dark:border-white/10 [&:has(>svg:only-child)]:aspect-square [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:px-0",
+  base: "relative box-border inline-flex h-9 cursor-default items-center justify-center gap-2 rounded-sm border border-black/10 px-3.5 text-center font-sans text-sm transition forced-color-adjust-none [-webkit-tap-highlight-color:transparent] dark:border-white/10 [&:has(>svg:only-child)]:aspect-square [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:px-0",
   variants: {
     isSelected: {
       false:

@@ -16,7 +16,7 @@ export interface ButtonProps extends RACButtonProps {
 
 export const button = tv({
   extend: focusRing,
-  base: "relative box-border inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-0 text-center font-sans text-sm font-medium whitespace-nowrap transition-[background-color,border-color,color,transform,opacity] duration-200 ease-out outline-none select-none [-webkit-tap-highlight-color:transparent] disabled:pointer-events-none pressed:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&:has(>svg:only-child)]:h-9 [&:has(>svg:only-child)]:w-9 [&:has(>svg:only-child)]:px-0",
+  base: "relative box-border inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-sm border px-4 py-0 text-center font-sans text-sm font-medium whitespace-nowrap transition-[background-color,border-color,color,transform,opacity] duration-200 ease-out outline-none select-none [-webkit-tap-highlight-color:transparent] disabled:pointer-events-none pressed:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&:has(>svg:only-child)]:h-9 [&:has(>svg:only-child)]:w-9 [&:has(>svg:only-child)]:px-0",
   variants: {
     variant: {
       primary:
