@@ -52,7 +52,7 @@ export function EditorPage() {
               >
                 <span className="flex items-center gap-2">
                   <LuRotateCcw />
-                  Reset Sample
+                  Clear Editor
                 </span>
               </Button>
             </Toolbar>
