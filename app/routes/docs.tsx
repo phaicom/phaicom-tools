@@ -13,7 +13,7 @@ export default function Docs() {
   const location = useLocation();
 
   return (
-    <main className="mx-auto flex w-full max-w-375 flex-1 flex-col px-4 py-6 md:px-6 xl:px-8">
+    <main className="mx-auto flex w-full max-w-screen-2xl flex-1 flex-col px-4 py-6 md:px-6 xl:px-8">
       <div className="grid flex-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)]">
         <DocsSidebar pathname={location.pathname} />
 
