@@ -4,27 +4,15 @@ import { Group } from "react-aria-components";
 import { LuCheck, LuClipboard, LuRotateCcw } from "react-icons/lu";
 
 import { Button } from "@/shared/components/ui/Button";
-import { Switch } from "@/shared/components/ui/Switch";
 import { Toolbar } from "@/shared/components/ui/Toolbar";
 import { cn } from "@/shared/utils/cn";
 
 import { useHtmlEditor } from "../hooks/useHtmlEditor";
 import { EditorPane } from "./EditorPane";
-import { HtmlPreviewPane } from "./HtmlPreviewPane";
 import { HtmlSourcePane } from "./HtmlSourcePane";
 
 export function HtmlEditorPage() {
-  const {
-    copied,
-    copyHtml,
-    deferredHtml,
-    deferredOutputHtml,
-    html,
-    resetHtml,
-    setWrapInParagraph,
-    updateHtml,
-    wrapInParagraph,
-  } = useHtmlEditor();
+  const { copied, copyHtml, deferredHtml, html, resetHtml, updateHtml } = useHtmlEditor();
 
   return (
     <div className="flex h-full min-h-0 flex-col gap-5">
@@ -39,18 +27,10 @@ export function HtmlEditorPage() {
 
         <Group aria-label="HTML editor actions" className="border-b border-border/60 pb-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-end">
-            <Switch
-              isSelected={wrapInParagraph}
-              onChange={setWrapInParagraph}
-              className="justify-between md:justify-start"
-            >
-              Wrap output in {"<p>"} tags
-            </Switch>
-
             <Toolbar aria-label="Document actions" className="w-full md:w-auto md:justify-end">
               <Button
                 variant="secondary"
-                isDisabled={!deferredOutputHtml}
+                isDisabled={!html}
                 onPress={() => void copyHtml()}
                 className={({ isDisabled }) =>
                   cn(
@@ -83,11 +63,7 @@ export function HtmlEditorPage() {
       <div className="flex flex-1 flex-col gap-4">
         <section className="grid gap-4 min-[1500px]:grid-cols-2">
           <EditorPane html={html} onChange={updateHtml} />
-          <HtmlPreviewPane html={deferredHtml} />
-        </section>
-
-        <section>
-          <HtmlSourcePane html={deferredOutputHtml} />
+          <HtmlSourcePane html={deferredHtml} className="h-full min-h-144" />
         </section>
       </div>
     </div>

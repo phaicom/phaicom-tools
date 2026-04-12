@@ -1,5 +1,4 @@
 export const EDITOR_STORAGE_KEY = "phaicom-tools:editor:html-draft";
-export const EDITOR_WRAP_PARAGRAPH_STORAGE_KEY = "phaicom-tools:editor:wrap-paragraph-output";
 
 export const DEFAULT_DOCUMENT_HTML = "";
 const LEGACY_SAMPLE_DOCUMENT_HTML = `
@@ -26,26 +25,4 @@ export function normalizeHtmlDocument(html: string) {
   }
 
   return normalized;
-}
-
-export function formatHtmlOutput(html: string, wrapInParagraph: boolean) {
-  const normalized = normalizeHtmlDocument(html);
-
-  if (!normalized) {
-    return wrapInParagraph ? "<p></p>" : "";
-  }
-
-  if (wrapInParagraph || typeof DOMParser === "undefined") {
-    return normalized;
-  }
-
-  const parser = new DOMParser();
-  const document = parser.parseFromString(normalized, "text/html");
-  const elements = Array.from(document.body.children);
-
-  if (elements.length !== 1 || elements[0]?.tagName.toLowerCase() !== "p") {
-    return normalized;
-  }
-
-  return elements[0].innerHTML.trim();
 }
