@@ -38,6 +38,20 @@ export function resolveThemeFromDocument(documentElement: HTMLElement): Theme {
   return documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
+export function applyThemeToDocument(theme: Theme, documentElement: HTMLElement) {
+  const isDark = theme === "dark";
+
+  documentElement.classList.toggle("dark", isDark);
+  documentElement.style.colorScheme = theme;
+  documentElement.style.backgroundColor = isDark ? THEME_DARK_BACKGROUND : THEME_LIGHT_BACKGROUND;
+  documentElement.style.color = isDark ? THEME_DARK_FOREGROUND : THEME_LIGHT_FOREGROUND;
+}
+
+export function persistTheme(theme: Theme, documentObject: Document = document) {
+  window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  documentObject.cookie = createThemeCookie(theme);
+}
+
 export function getThemeScript() {
   return `
     (() => {

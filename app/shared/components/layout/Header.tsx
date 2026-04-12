@@ -127,14 +127,16 @@ export const Header = () => {
             aria-label={isReady ? `Switch to ${isDark ? "light" : "dark"} theme` : "Toggle theme"}
             className="min-w-0 gap-1.5 px-2.5 sm:px-3"
           >
-            {!isReady ? (
-              <LuSunMoon aria-hidden="true" />
-            ) : isDark ? (
-              <LuMoon aria-hidden="true" />
-            ) : (
+            <span aria-hidden="true" className="dark:hidden">
               <LuSun aria-hidden="true" />
-            )}
-            <span>{!isReady ? "Theme" : theme === "dark" ? "Dark" : "Light"}</span>
+            </span>
+            <span aria-hidden="true" className="hidden dark:inline">
+              <LuMoon aria-hidden="true" />
+            </span>
+            <span className="inline-block min-w-[3rem]">
+              <span className="dark:hidden">Light</span>
+              <span className="hidden dark:inline">Dark</span>
+            </span>
           </HeaderActionToggle>
         </div>
       </div>

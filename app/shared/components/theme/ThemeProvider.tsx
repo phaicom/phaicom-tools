@@ -3,14 +3,10 @@
 import { createContext, useContext, useLayoutEffect, useState } from "react";
 
 import {
-  createThemeCookie,
-  THEME_STORAGE_KEY,
+  applyThemeToDocument,
+  persistTheme,
   type Theme,
   resolveThemeFromDocument,
-  THEME_DARK_BACKGROUND,
-  THEME_DARK_FOREGROUND,
-  THEME_LIGHT_BACKGROUND,
-  THEME_LIGHT_FOREGROUND,
 } from "@/shared/components/theme/theme";
 
 type ThemeContextValue = {
@@ -29,10 +25,20 @@ type ThemeProviderProps = {
 };
 
 export function ThemeProvider({ children, initialTheme = null }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme | null>(initialTheme);
+  const [theme, setThemeState] = useState<Theme | null>(() =>
+    typeof document === "undefined"
+      ? initialTheme
+      : resolveThemeFromDocument(document.documentElement),
+  );
+
+  const setTheme = (nextTheme: Theme) => {
+    applyThemeToDocument(nextTheme, document.documentElement);
+    persistTheme(nextTheme);
+    setThemeState(nextTheme);
+  };
 
   useLayoutEffect(() => {
-    setTheme(resolveThemeFromDocument(document.documentElement));
+    setThemeState(resolveThemeFromDocument(document.documentElement));
   }, []);
 
   useLayoutEffect(() => {
@@ -40,15 +46,8 @@ export function ThemeProvider({ children, initialTheme = null }: ThemeProviderPr
       return;
     }
 
-    const root = document.documentElement;
-    const isDark = theme === "dark";
-
-    root.classList.toggle("dark", isDark);
-    root.style.colorScheme = theme;
-    root.style.backgroundColor = isDark ? THEME_DARK_BACKGROUND : THEME_LIGHT_BACKGROUND;
-    root.style.color = isDark ? THEME_DARK_FOREGROUND : THEME_LIGHT_FOREGROUND;
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-    document.cookie = createThemeCookie(theme);
+    applyThemeToDocument(theme, document.documentElement);
+    persistTheme(theme);
   }, [theme]);
 
   return (
@@ -58,12 +57,14 @@ export function ThemeProvider({ children, initialTheme = null }: ThemeProviderPr
         isReady: theme !== null,
         setTheme,
         theme,
-        toggleTheme: () =>
-          setTheme((currentTheme) =>
-            (currentTheme ?? resolveThemeFromDocument(document.documentElement)) === "dark"
+        toggleTheme: () => {
+          const nextTheme =
+            (theme ?? resolveThemeFromDocument(document.documentElement)) === "dark"
               ? "light"
-              : "dark",
-          ),
+              : "dark";
+
+          setTheme(nextTheme);
+        },
       }}
     >
       {children}
