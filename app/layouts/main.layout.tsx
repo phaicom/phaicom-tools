@@ -15,14 +15,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const { locale, direction } = useLocale();
   const rootData = useRouteLoaderData<{ theme: Theme | null }>("root");
   const initialTheme = rootData?.theme ?? null;
+  const serverThemeClassName =
+    typeof document === "undefined" && initialTheme === "dark" ? "dark" : undefined;
+  const serverThemeStyle =
+    typeof document === "undefined" ? { colorScheme: initialTheme ?? "light" } : undefined;
 
   return (
     <html
       lang={locale}
       dir={direction}
-      className={initialTheme === "dark" ? "dark" : undefined}
+      className={serverThemeClassName}
       suppressHydrationWarning
-      style={{ colorScheme: initialTheme ?? "light" }}
+      style={serverThemeStyle}
     >
       <head>
         <meta charSet="utf-8" />
