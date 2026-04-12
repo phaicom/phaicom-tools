@@ -1,4 +1,4 @@
-import { SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiReact, SiTailwindcss, SiTypescript, SiReactrouter } from "react-icons/si";
 import { Link } from "react-router";
 
 import { button } from "@/shared/components/ui/Button";
@@ -38,7 +38,7 @@ export default function Home() {
         </Link>
       </div>
       <div className="mt-10 flex flex-row justify-center gap-6">
-        {[SiReact, SiTypescript, SiTailwindcss].map((Icon) => (
+        {[SiReact, SiTypescript, SiTailwindcss, SiReactrouter].map((Icon) => (
           <Icon
             key={Icon.name}
             className="size-8 text-foreground/60 transition-all duration-300 hover:scale-110 hover:text-primary"
