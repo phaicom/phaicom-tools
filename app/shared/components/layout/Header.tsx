@@ -1,4 +1,3 @@
-import { TooltipTrigger } from "react-aria-components";
 import { LuGithub, LuMoon, LuStar, LuSun, LuSunMoon } from "react-icons/lu";
 import { Link, useLocation, useRouteLoaderData } from "react-router";
 
@@ -7,7 +6,7 @@ import type { Theme } from "@/shared/components/theme/theme";
 import { DocsNavTrigger } from "@/features/docs";
 import { HeaderActionLink, HeaderActionToggle } from "@/shared/components/layout/HeaderAction";
 import { useTheme } from "@/shared/components/theme/ThemeProvider";
-import { Tooltip } from "@/shared/components/ui/Tooltip";
+import { HoverLabel } from "@/shared/components/ui/HoverLabel";
 
 const GITHUB_REPO_URL = "https://github.com/phaicom/phaicom-tools";
 
@@ -46,7 +45,7 @@ export const Header = () => {
         </Link>
 
         <div className="ml-auto flex items-center gap-2">
-          <TooltipTrigger delay={150}>
+          <HoverLabel label="View on GitHub" side="bottom">
             <HeaderActionLink
               href={GITHUB_REPO_URL}
               target="_blank"
@@ -64,8 +63,7 @@ export const Header = () => {
                 {starCount === null ? null : <span>{formatStarCount(starCount)}</span>}
               </span>
             </HeaderActionLink>
-            <Tooltip>View on GitHub</Tooltip>
-          </TooltipTrigger>
+          </HoverLabel>
 
           <HeaderActionToggle
             isSelected={isDark}

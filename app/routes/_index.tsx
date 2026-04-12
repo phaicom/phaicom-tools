@@ -2,6 +2,7 @@ import { SiReact, SiTailwindcss, SiTypescript, SiReactrouter } from "react-icons
 import { Link } from "react-router";
 
 import { button } from "@/shared/components/ui/Button";
+import { HoverLabel } from "@/shared/components/ui/HoverLabel";
 import { cn } from "@/shared/utils/cn";
 
 export function meta() {
@@ -16,6 +17,13 @@ export function meta() {
 }
 
 export default function Home() {
+  const techStack = [
+    { name: "React", icon: SiReact },
+    { name: "TypeScript", icon: SiTypescript },
+    { name: "Tailwind CSS", icon: SiTailwindcss },
+    { name: "React Router", icon: SiReactrouter },
+  ];
+
   return (
     <main className="starfield flex flex-col items-center justify-center px-4 pt-10 pb-4 md:px-6">
       <div className="flex w-full max-w-3xl flex-col gap-6 md:items-center md:text-center">
@@ -38,11 +46,10 @@ export default function Home() {
         </Link>
       </div>
       <div className="mt-10 flex flex-row justify-center gap-6">
-        {[SiReact, SiTypescript, SiTailwindcss, SiReactrouter].map((Icon) => (
-          <Icon
-            key={Icon.name}
-            className="size-8 text-foreground/60 transition-all duration-300 hover:scale-110 hover:text-primary"
-          />
+        {techStack.map(({ name, icon: Icon }) => (
+          <HoverLabel key={name} label={name}>
+            <Icon className="size-8 text-foreground/60 transition-all duration-300 group-hover:scale-110 group-hover:text-primary" />
+          </HoverLabel>
         ))}
       </div>
     </main>
