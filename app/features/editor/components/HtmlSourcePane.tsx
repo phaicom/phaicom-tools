@@ -10,11 +10,7 @@ export function HtmlSourcePane({ html }: HtmlSourcePaneProps) {
   return (
     <EditorPanel
       title="HTML Output"
-      description={
-        <>
-          Raw HTML generated from <code>editor.getHTML()</code>.
-        </>
-      }
+      description="Raw HTML generated from editor.getHTML()."
       className="min-h-80"
       contentClassName="overflow-auto px-4 py-4 md:px-5"
     >

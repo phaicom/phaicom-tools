@@ -140,7 +140,7 @@ function finalizeNodes(nodes: MutableDocsNavNode[]): DocsNavNode[] {
     id: node.id,
     label: node.label,
     segment: node.segment,
-    path: node.children.length === 0 && node.hasPage ? node.path : undefined,
+    path: node.hasPage && node.children.length === 0 ? node.path : undefined,
     children: finalizeNodes(node.children),
   }));
 }
@@ -196,6 +196,20 @@ function buildDocsNavigation() {
 
 export const docsNavigation = buildDocsNavigation();
 
+const docsLabelsByPath = new Map<string, string>();
+
+function indexDocsNavigation(nodes: DocsNavNode[]) {
+  for (const node of nodes) {
+    if (node.path) {
+      docsLabelsByPath.set(node.path, node.label);
+    }
+
+    indexDocsNavigation(node.children);
+  }
+}
+
+indexDocsNavigation(docsNavigation.items);
+
 export function getDocsBreadcrumbs(pathname: string) {
   if (!pathname.startsWith("/docs")) {
     return [] satisfies DocsBreadcrumb[];
@@ -217,30 +231,14 @@ export function getDocsBreadcrumbs(pathname: string) {
 
   for (const [index, segment] of segments.entries()) {
     currentPath = `${currentPath}/${segment}`;
-    const matchingNode = findNodeByPath(docsNavigation.items, currentPath);
+    const label = docsLabelsByPath.get(currentPath) ?? toTitleCase(segment);
 
     breadcrumbs.push({
-      label: matchingNode?.label ?? toTitleCase(segment),
-      path: matchingNode?.path,
+      label,
+      path: docsLabelsByPath.has(currentPath) ? currentPath : undefined,
       isCurrent: index === segments.length - 1,
     });
   }
 
   return breadcrumbs;
-}
-
-function findNodeByPath(nodes: DocsNavNode[], path: string): DocsNavNode | null {
-  for (const node of nodes) {
-    if (node.path === path) {
-      return node;
-    }
-
-    const childMatch = findNodeByPath(node.children, path);
-
-    if (childMatch) {
-      return childMatch;
-    }
-  }
-
-  return null;
 }

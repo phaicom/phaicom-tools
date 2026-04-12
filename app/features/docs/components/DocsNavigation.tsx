@@ -18,6 +18,8 @@ function getExpandedKeys(nodes: DocsNavNode[]): string[] {
   );
 }
 
+const defaultExpandedKeys = getExpandedKeys(docsNavigation.items);
+
 function isNodeActive(node: DocsNavNode, pathname: string): boolean {
   if (node.path === pathname) {
     return true;
@@ -96,7 +98,7 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
       <Tree
         aria-label="Documentation pages"
         selectionMode="none"
-        defaultExpandedKeys={getExpandedKeys(docsNavigation.items)}
+        defaultExpandedKeys={defaultExpandedKeys}
         className={cn("w-full border-0 bg-transparent shadow-none", className)}
       >
         {docsNavigation.overview ? (
