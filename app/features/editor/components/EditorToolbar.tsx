@@ -22,6 +22,8 @@ import { ToggleButton } from "@/shared/components/ui/ToggleButton";
 import { Toolbar } from "@/shared/components/ui/Toolbar";
 import { cn } from "@/shared/utils/cn";
 
+import { transformCurrentParagraphLineGroupToList } from "../utils/listTransform";
+
 function getLinkUrl(editor: Editor) {
   const currentHref = editor.getAttributes("link").href;
   const nextHref = window.prompt("Enter a link URL", currentHref ?? "https://");
@@ -175,13 +177,25 @@ export function EditorToolbar({ editor }: { editor: Editor | null }) {
         label="Bullet list"
         icon={LuList}
         isSelected={editor.isActive("bulletList")}
-        onPress={() => editor.chain().focus().toggleBulletList().run()}
+        onPress={() => {
+          if (transformCurrentParagraphLineGroupToList(editor, "bulletList")) {
+            return;
+          }
+
+          editor.chain().focus().toggleBulletList().run();
+        }}
       />
       <ToolbarToggleButton
         label="Ordered list"
         icon={LuListOrdered}
         isSelected={editor.isActive("orderedList")}
-        onPress={() => editor.chain().focus().toggleOrderedList().run()}
+        onPress={() => {
+          if (transformCurrentParagraphLineGroupToList(editor, "orderedList")) {
+            return;
+          }
+
+          editor.chain().focus().toggleOrderedList().run();
+        }}
       />
       <ToolbarToggleButton
         label={editor.isActive("link") ? "Edit link" : "Add link"}
