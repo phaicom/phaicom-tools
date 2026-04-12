@@ -20,7 +20,7 @@ export function HtmlSourcePane({ html }: HtmlSourcePaneProps) {
       contentClassName="overflow-auto px-4 py-4 md:px-5"
     >
       <pre className="min-h-56 overflow-auto rounded-sm bg-card/35 font-mono text-sm leading-7 whitespace-pre-wrap text-foreground">
-        {formattedHtml || "<p></p>"}
+        {formattedHtml || ""}
       </pre>
     </EditorPanel>
   );
