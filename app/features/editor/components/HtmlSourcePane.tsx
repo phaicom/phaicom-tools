@@ -18,7 +18,6 @@ export function HtmlSourcePane({ className, html }: HtmlSourcePaneProps) {
   return (
     <EditorPanel
       title="Formatted HTML"
-      description="Formatted HTML generated from editor.getHTML()."
       className={cn("min-h-80", className)}
       contentClassName="overflow-auto px-4 py-4 md:px-5"
     >
@@ -27,7 +26,7 @@ export function HtmlSourcePane({ className, html }: HtmlSourcePaneProps) {
           {formattedHtml}
         </pre>
       ) : (
-        <div className="flex min-h-56 items-center justify-center rounded-sm border border-dashed border-border/70 bg-card/35 px-6 text-center text-sm text-muted-foreground">
+        <div className="flex h-full min-h-56 items-center justify-center rounded-sm border border-dashed border-border/70 bg-card/35 px-6 text-center text-sm text-muted-foreground">
           Start typing on the left to generate formatted HTML here.
         </div>
       )}

@@ -77,14 +77,12 @@ export function ImageDropZone({ disabled = false, onAddFiles }: ImageDropZonePro
               <div className="space-y-1">
                 <h2 className="text-lg font-semibold tracking-tight">Drop images here</h2>
                 <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
-                  Drag in one batch or browse from disk. PNG, JPG, JPEG, WebP, AVIF, and GIF are
-                  accepted when the current server build can process them.
+                  Drop images or click to upload. Supports:{" "}
+                  <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+                    {ACCEPTED_IMAGE_EXTENSIONS.join("  ")}
+                  </p>
                 </p>
               </div>
-
-              <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
-                {ACCEPTED_IMAGE_EXTENSIONS.join("  ")}
-              </p>
             </div>
           </div>
 
