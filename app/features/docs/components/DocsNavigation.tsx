@@ -12,6 +12,12 @@ type DocsNavigationProps = {
   className?: string;
 };
 
+const navItemClassName =
+  "rounded-sm border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none transition-[background-color,color,transform] duration-300 ease-out hover:-translate-y-[1px] hover:bg-sidebar-accent/65 hover:text-sidebar-accent-foreground";
+
+const navItemContentClassName =
+  "flex min-w-0 flex-1 items-center rounded-sm pr-2 text-sm transition-colors duration-300";
+
 function getExpandedKeys(nodes: DocsNavNode[]): string[] {
   return nodes.flatMap((node) =>
     node.children.length > 0 ? [node.id, ...getExpandedKeys(node.children)] : [],
@@ -44,7 +50,7 @@ function renderTreeItems(
         key={node.id}
         title={node.label}
         className={cn(
-          "rounded-sm border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none",
+          navItemClassName,
           node.path ? "cursor-pointer" : "cursor-default",
           isActive && "bg-sidebar-primary/12 text-sidebar-primary",
           !isActive && isBranchActive && "bg-sidebar-accent/55",
@@ -60,13 +66,13 @@ function renderTreeItems(
         content={
           <div
             className={cn(
-              "flex min-w-0 flex-1 items-center rounded-sm pr-2 text-sm",
+              navItemContentClassName,
               hasChildren ? "font-semibold tracking-tight" : "font-medium",
               isActive
                 ? "text-sidebar-primary"
                 : hasChildren
-                  ? "text-sidebar-foreground"
-                  : "text-sidebar-foreground/80",
+                  ? "text-sidebar-foreground group-hover:text-sidebar-accent-foreground"
+                  : "text-sidebar-foreground/80 group-hover:text-sidebar-accent-foreground",
             )}
           >
             <span className="truncate">{node.label}</span>
@@ -105,7 +111,8 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
           <TreeItem
             title={docsNavigation.overview.label}
             className={cn(
-              "cursor-pointer rounded-sm border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none",
+              navItemClassName,
+              "cursor-pointer",
               pathname === docsNavigation.overview.path &&
                 "bg-sidebar-primary/12 text-sidebar-primary",
             )}
@@ -116,10 +123,11 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
             content={
               <div
                 className={cn(
-                  "flex min-w-0 flex-1 items-center rounded-sm pr-2 text-sm font-medium",
+                  navItemContentClassName,
+                  "font-medium",
                   pathname === docsNavigation.overview.path
                     ? "text-sidebar-primary"
-                    : "text-sidebar-foreground/80",
+                    : "text-sidebar-foreground/80 group-hover:text-sidebar-accent-foreground",
                 )}
               >
                 <span className="truncate">{docsNavigation.overview.label}</span>
