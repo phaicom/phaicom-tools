@@ -55,7 +55,7 @@ export function EditorPane({ html, onChange }: EditorPaneProps) {
   return (
     <EditorPanel
       title="Editor"
-      className="h-full min-h-[36rem]"
+      className="h-full min-h-144"
       contentClassName="html-editor-shell"
       headerContent={<EditorModeTabs mode={mode} onChange={setMode} />}
     >
@@ -64,7 +64,7 @@ export function EditorPane({ html, onChange }: EditorPaneProps) {
           <EditorToolbar editor={editor} />
 
           <div className="min-h-0 flex-1 overflow-auto">
-            <EditorContent editor={editor} className="h-full min-h-[31rem]" />
+            <EditorContent editor={editor} className="h-full min-h-124" />
           </div>
         </>
       ) : (
@@ -80,7 +80,7 @@ export function EditorPane({ html, onChange }: EditorPaneProps) {
               spellCheck={false}
               className={({ isFocusVisible, isHovered }) =>
                 cn(
-                  "min-h-[31rem] w-full resize-none border-0 bg-background px-4 py-4 font-mono text-sm leading-7 text-foreground transition outline-none md:px-5",
+                  "min-h-124 w-full resize-none border-0 bg-background px-4 py-4 font-mono text-sm leading-7 text-foreground transition outline-none md:px-5",
                   isHovered && "bg-card/35",
                   isFocusVisible && "ring-2 ring-ring/20 ring-inset",
                 )

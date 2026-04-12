@@ -16,16 +16,16 @@ export function HtmlPreviewPane({ html }: HtmlPreviewPaneProps) {
     <EditorPanel
       title="Live Preview"
       description="Rendered safely from the current HTML document."
-      className="h-full min-h-[36rem]"
+      className="h-full min-h-144"
       contentClassName="overflow-auto px-4 py-4 md:px-5"
     >
       {sanitizedHtml ? (
         <div
-          className="prose-surface html-preview min-h-[31rem] text-sm text-foreground"
+          className="prose-surface html-preview min-h-124 text-sm text-foreground"
           dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
         />
       ) : (
-        <div className="flex min-h-[31rem] items-center justify-center rounded-sm border border-dashed border-border/70 bg-card/35 px-6 text-center text-sm text-muted-foreground">
+        <div className="flex min-h-124 items-center justify-center rounded-sm border border-dashed border-border/70 bg-card/35 px-6 text-center text-sm text-muted-foreground">
           Start typing on the left to generate HTML and preview it here.
         </div>
       )}

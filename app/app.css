@@ -261,11 +261,11 @@ body {
   }
 
   .html-editor-shell {
-    @apply flex h-full min-h-[31rem] flex-col bg-background shadow-none;
+    @apply flex h-full min-h-124 flex-col bg-background shadow-none;
   }
 
   .html-editor-shell .tiptap {
-    @apply min-h-[31rem];
+    @apply min-h-124;
   }
 
   .html-editor-shell .tiptap:focus {
