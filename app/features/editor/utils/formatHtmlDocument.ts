@@ -73,8 +73,12 @@ function serializeAttributes(element: Element) {
     .join("");
 }
 
-function normalizeTextNode(text: string) {
+function collapseTextWhitespace(text: string) {
   return text.replace(/\s+/g, " ").trim();
+}
+
+function normalizeInlineTextNode(text: string) {
+  return text.replace(/\s+/g, " ");
 }
 
 function formatInlineChildren(nodes: ChildNode[]) {
@@ -95,16 +99,8 @@ function formatElement(element: Element, level: number, indent: boolean): string
   }
 
   const childNodes = Array.from(element.childNodes).filter((node) => {
-    if (node.nodeType !== Node.TEXT_NODE) {
-      return true;
-    }
-
-    return normalizeTextNode(node.textContent ?? "").length > 0;
+    return node.nodeType === Node.ELEMENT_NODE || node.nodeType === Node.TEXT_NODE;
   });
-
-  if (childNodes.length === 0) {
-    return `${prefix}<${tagName}${attributes}></${tagName}>`;
-  }
 
   const hasBlockChildren = childNodes.some(
     (node) =>
@@ -112,12 +108,29 @@ function formatElement(element: Element, level: number, indent: boolean): string
       BLOCK_ELEMENTS.has((node as Element).tagName.toLowerCase()),
   );
 
+  const filteredChildNodes = childNodes.filter((node) => {
+    if (node.nodeType !== Node.TEXT_NODE) {
+      return true;
+    }
+
+    const textContent = node.textContent ?? "";
+    const normalizedText = hasBlockChildren
+      ? collapseTextWhitespace(textContent)
+      : normalizeInlineTextNode(textContent);
+
+    return normalizedText.length > 0;
+  });
+
+  if (filteredChildNodes.length === 0) {
+    return `${prefix}<${tagName}${attributes}></${tagName}>`;
+  }
+
   if (!hasBlockChildren) {
-    const content = formatInlineChildren(childNodes);
+    const content = formatInlineChildren(filteredChildNodes);
     return `${prefix}<${tagName}${attributes}>${content}</${tagName}>`;
   }
 
-  const content = childNodes
+  const content = filteredChildNodes
     .map((node) => formatNode(node, level + 1, true))
     .filter(Boolean)
     .join("\n");
@@ -127,7 +140,9 @@ function formatElement(element: Element, level: number, indent: boolean): string
 
 function formatNode(node: ChildNode, level: number, indent: boolean): string {
   if (node.nodeType === Node.TEXT_NODE) {
-    const text = normalizeTextNode(node.textContent ?? "");
+    const text = indent
+      ? collapseTextWhitespace(node.textContent ?? "")
+      : normalizeInlineTextNode(node.textContent ?? "");
 
     if (!text) {
       return "";

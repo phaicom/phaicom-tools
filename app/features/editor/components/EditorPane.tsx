@@ -58,14 +58,14 @@ export function EditorPane({ html, onChange }: EditorPaneProps) {
         </>
       ) : (
         <TextField aria-label="HTML editor" className="flex min-h-0 flex-1 flex-col">
-          <div className="min-h-0 flex-1 overflow-auto">
+          <div className="min-h-0 flex-1 overflow-hidden">
             <TextArea
               value={html}
               onChange={(event) => onChange(event.target.value)}
               spellCheck={false}
               className={({ isFocusVisible, isHovered }) =>
                 cn(
-                  "min-h-124 w-full resize-none border-0 bg-background px-4 py-4 font-mono text-sm leading-7 text-foreground transition outline-none md:px-5",
+                  "h-full min-h-124 w-full resize-none border-0 bg-background px-4 py-4 font-mono text-sm leading-7 text-foreground transition outline-none md:px-5",
                   isHovered && "bg-card/35",
                   isFocusVisible && "ring-2 ring-ring/20 ring-inset",
                 )
