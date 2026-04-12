@@ -18,7 +18,7 @@ export function HtmlPreviewPane({ html }: HtmlPreviewPaneProps) {
       aria-labelledby={titleId}
       className="flex h-full min-h-[36rem] flex-col overflow-hidden rounded-sm border border-border/60 bg-background"
     >
-      <div className="border-b border-border/60 px-4 py-3">
+      <div className="border-b border-border/60 px-4 py-2">
         <Heading id={titleId} className="text-base font-semibold tracking-tight">
           Live Preview
         </Heading>

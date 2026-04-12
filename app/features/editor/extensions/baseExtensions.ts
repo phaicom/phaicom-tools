@@ -14,8 +14,8 @@ export function createBaseExtensions() {
       autolink: true,
       defaultProtocol: "https",
       HTMLAttributes: {
-        rel: "noopener noreferrer nofollow",
-        target: "_blank",
+        rel: null,
+        target: null,
       },
       openOnClick: false,
       protocols: ["http", "https", "mailto", "tel"],
