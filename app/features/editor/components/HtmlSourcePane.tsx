@@ -22,7 +22,7 @@ export function HtmlSourcePane({ className, html }: HtmlSourcePaneProps) {
       contentClassName="overflow-auto px-4 py-4 md:px-5"
     >
       {formattedHtml ? (
-        <pre className="min-h-56 overflow-auto rounded-sm bg-card/35 font-mono text-sm leading-7 whitespace-pre-wrap text-foreground">
+        <pre className="min-h-56 overflow-auto rounded-sm font-mono text-sm leading-7 whitespace-pre-wrap text-foreground">
           {formattedHtml}
         </pre>
       ) : (

@@ -179,9 +179,9 @@ html {
 body {
   @apply bg-background text-base leading-relaxed text-foreground;
   background:
-    radial-gradient(circle at 15% 20%, oklch(0.8 0.08 300 / 0.18), transparent 24%),
-    radial-gradient(circle at 85% 15%, oklch(0.82 0.06 250 / 0.14), transparent 22%),
-    linear-gradient(180deg, oklch(0.985 0.01 300) 0%, oklch(0.95 0.015 285) 100%);
+    radial-gradient(circle at 15% 20%, var(--glow-primary), transparent 24%),
+    radial-gradient(circle at 85% 15%, var(--glow-accent), transparent 22%),
+    linear-gradient(180deg, var(--card) 0%, var(--background) 100%);
   background-attachment: fixed;
 }
 
