@@ -1,8 +1,6 @@
-import type { HtmlDocument } from "../types/editor";
-
 export const EDITOR_STORAGE_KEY = "phaicom-tools:editor:html-draft";
 
-export const DEFAULT_DOCUMENT_HTML = "" satisfies HtmlDocument;
+export const DEFAULT_DOCUMENT_HTML = "";
 const LEGACY_SAMPLE_DOCUMENT_HTML = `
 <h1>Quick Note</h1>
 <p>Write <strong>rich text</strong> here.</p>
@@ -15,7 +13,7 @@ const LEGACY_SAMPLE_DOCUMENT_HTML = `
 
 const EMPTY_PARAGRAPH_PATTERN = /^<p(?:\s[^>]*)?><\/p>$/i;
 
-export function normalizeHtmlDocument(html: string): HtmlDocument {
+export function normalizeHtmlDocument(html: string) {
   const normalized = html.trim();
 
   if (

@@ -1,8 +1,6 @@
 "use client";
 
-import { startTransition, useDeferredValue, useEffect, useRef, useState } from "react";
-
-import type { HtmlDocument } from "../types/editor";
+import { useDeferredValue, useEffect, useState } from "react";
 
 import {
   DEFAULT_DOCUMENT_HTML,
@@ -11,10 +9,10 @@ import {
 } from "../utils/htmlDocument";
 
 export function useHtmlEditor() {
-  const [html, setHtml] = useState<HtmlDocument>(DEFAULT_DOCUMENT_HTML);
+  const [html, setHtml] = useState(DEFAULT_DOCUMENT_HTML);
+  const [hasLoadedInitialValue, setHasLoadedInitialValue] = useState(false);
   const deferredHtml = useDeferredValue(html);
   const [copied, setCopied] = useState(false);
-  const copyTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -26,52 +24,44 @@ export function useHtmlEditor() {
     if (savedHtml) {
       setHtml(normalizeHtmlDocument(savedHtml));
     }
+
+    setHasLoadedInitialValue(true);
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === "undefined" || !hasLoadedInitialValue) {
       return;
     }
 
     window.localStorage.setItem(EDITOR_STORAGE_KEY, html);
-  }, [html]);
+  }, [hasLoadedInitialValue, html]);
 
-  useEffect(
-    () => () => {
-      if (copyTimeoutRef.current !== null) {
-        window.clearTimeout(copyTimeoutRef.current);
-      }
-    },
-    [],
-  );
+  useEffect(() => {
+    if (!copied) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => setCopied(false), 1800);
+    return () => window.clearTimeout(timeoutId);
+  }, [copied]);
 
   function updateHtml(nextHtml: string) {
-    const normalizedHtml = normalizeHtmlDocument(nextHtml);
-
-    startTransition(() => {
-      setHtml(normalizedHtml);
-    });
+    setHtml(normalizeHtmlDocument(nextHtml));
+    setCopied(false);
   }
 
   function resetHtml() {
     setHtml(DEFAULT_DOCUMENT_HTML);
+    setCopied(false);
   }
 
   async function copyHtml() {
-    if (typeof navigator === "undefined" || !navigator.clipboard) {
+    if (!html || typeof navigator === "undefined" || !navigator.clipboard) {
       return;
     }
 
     await navigator.clipboard.writeText(html);
     setCopied(true);
-
-    if (copyTimeoutRef.current !== null) {
-      window.clearTimeout(copyTimeoutRef.current);
-    }
-
-    copyTimeoutRef.current = window.setTimeout(() => {
-      setCopied(false);
-    }, 1800);
   }
 
   return {

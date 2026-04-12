@@ -1,4 +1,4 @@
-import { EditorPage } from "@/features/editor";
+import { HtmlEditorPage } from "@/features/editor";
 
 export const handle = {
   docsNav: {
@@ -19,5 +19,5 @@ export function meta() {
 }
 
 export default function EditorDocsPage() {
-  return <EditorPage />;
+  return <HtmlEditorPage />;
 }

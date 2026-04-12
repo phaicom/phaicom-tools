@@ -1,1 +1,1 @@
-export { EditorPage } from "./components/EditorPage";
+export { HtmlEditorPage } from "./components/HtmlEditorPage";

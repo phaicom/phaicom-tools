@@ -12,7 +12,7 @@ import { EditorPane } from "./EditorPane";
 import { HtmlPreviewPane } from "./HtmlPreviewPane";
 import { HtmlSourcePane } from "./HtmlSourcePane";
 
-export function EditorPage() {
+export function HtmlEditorPage() {
   const { copied, copyHtml, deferredHtml, html, resetHtml, updateHtml } = useHtmlEditor();
 
   return (
@@ -31,6 +31,7 @@ export function EditorPage() {
             <Toolbar aria-label="Document actions" className="w-full md:w-auto md:justify-end">
               <Button
                 variant="secondary"
+                isDisabled={!html}
                 onPress={() => void copyHtml()}
                 className={({ isDisabled }) =>
                   cn(
