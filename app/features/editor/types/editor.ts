@@ -1,0 +1,1 @@
+export type HtmlDocument = string;

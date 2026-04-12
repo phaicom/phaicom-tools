@@ -11,13 +11,13 @@ export function meta() {
 
 export default function Docs() {
   const location = useLocation();
-  const isMarkdownEditorPage = location.pathname === "/docs/markdown-editor";
+  const isEditorPage = location.pathname === "/docs/editor";
 
   return (
     <main className="mx-auto flex w-full max-w-375 flex-1 flex-col px-4 py-6 md:px-6 xl:px-8">
       <div
         className={
-          isMarkdownEditorPage
+          isEditorPage
             ? "grid flex-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)]"
             : "grid flex-1 gap-8 xl:grid-cols-[280px_minmax(0,1fr)] 2xl:gap-9"
         }

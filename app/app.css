@@ -259,24 +259,63 @@ body {
     @apply rounded-sm border border-primary/20 bg-accent/45 px-4 py-3;
   }
 
-  .markdown-editor-shell .mdxeditor-toolbar {
-    @apply sticky top-0 z-10;
+  .html-editor-shell {
+    @apply flex h-full min-h-[31rem] flex-col bg-background shadow-none;
   }
 
-  .mdxeditor-popup-container {
-    z-index: 60;
+  .html-editor-shell .tiptap {
+    @apply min-h-[31rem];
   }
 
-  .markdown-editor-shell .mdxeditor-root-contenteditable,
-  .markdown-editor-shell .mdxeditor-source-editor {
-    @apply min-h-[23rem];
+  .html-editor-shell .tiptap:focus {
+    outline: none;
   }
 
-  .markdown-editor-shell .mdxeditor-popup-container,
-  .markdown-editor-shell .mdxeditor-select-content,
-  .markdown-editor-shell .mdxeditor-toolbar button,
-  .markdown-editor-shell .mdxeditor-toolbar select {
-    @apply text-sm;
+  .html-editor-content a,
+  .html-preview a {
+    @apply text-primary underline underline-offset-4;
+  }
+
+  .html-editor-content blockquote,
+  .html-preview blockquote {
+    @apply border-l-3 border-primary/35 pl-4 text-muted-foreground;
+  }
+
+  .html-editor-content code,
+  .html-preview code {
+    @apply rounded-xs bg-secondary px-1.5 py-0.5 text-[0.92em];
+  }
+
+  .html-editor-content pre,
+  .html-preview pre {
+    @apply overflow-x-auto rounded-sm bg-foreground p-4 text-background;
+  }
+
+  .html-editor-content table,
+  .html-preview table {
+    @apply w-full border-collapse overflow-hidden rounded-sm;
+  }
+
+  .html-editor-content td,
+  .html-editor-content th,
+  .html-preview td,
+  .html-preview th {
+    @apply border border-border px-3 py-2;
+  }
+
+  .html-editor-content th,
+  .html-preview th {
+    @apply bg-secondary/80 text-left;
+  }
+
+  .html-editor-content ul,
+  .html-preview ul {
+    @apply list-disc;
+  }
+
+  .html-editor-content ol,
+  .html-preview ol {
+    @apply list-decimal;
   }
 
   @keyframes rainbowIcon {
