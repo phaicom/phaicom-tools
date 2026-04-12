@@ -13,10 +13,42 @@ type DocsNavigationProps = {
 };
 
 const navItemClassName =
-  "rounded-sm border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none transition-[background-color,color,transform] duration-300 ease-out hover:-translate-y-[1px] hover:bg-sidebar-accent/65 hover:text-sidebar-accent-foreground";
+  "rounded-md border-t-0 bg-transparent px-2 py-1.5 text-sidebar-foreground shadow-none transition-[background-color,color,border-color] duration-200 ease-out hover:bg-sidebar-accent/35";
 
 const navItemContentClassName =
-  "flex min-w-0 flex-1 items-center rounded-sm pr-2 text-sm transition-colors duration-300";
+  "flex min-w-0 flex-1 items-center rounded-md pr-2 text-sm transition-colors duration-200";
+
+function getNavItemStateClassName(isActive: boolean, isBranchActive: boolean) {
+  if (isActive) {
+    return "bg-sidebar-primary/10 text-sidebar-primary ring-1 ring-inset ring-sidebar-primary/15";
+  }
+
+  if (isBranchActive) {
+    return "bg-sidebar-accent/20 text-sidebar-foreground";
+  }
+
+  return "text-sidebar-foreground";
+}
+
+function getNavItemContentStateClassName(
+  isActive: boolean,
+  isBranchActive: boolean,
+  hasChildren: boolean,
+) {
+  if (isActive) {
+    return "text-sidebar-primary";
+  }
+
+  if (isBranchActive) {
+    return "text-sidebar-foreground";
+  }
+
+  if (hasChildren) {
+    return "text-sidebar-foreground/90 group-hover:text-sidebar-foreground";
+  }
+
+  return "text-sidebar-foreground/70 group-hover:text-sidebar-foreground";
+}
 
 function getExpandedKeys(nodes: DocsNavNode[]): string[] {
   return nodes.flatMap((node) =>
@@ -52,8 +84,7 @@ function renderTreeItems(
         className={cn(
           navItemClassName,
           node.path ? "cursor-pointer" : "cursor-default",
-          isActive && "bg-sidebar-primary/12 text-sidebar-primary",
-          !isActive && isBranchActive && "bg-sidebar-accent/55",
+          getNavItemStateClassName(isActive, !isActive && isBranchActive),
         )}
         onAction={
           node.path
@@ -68,11 +99,7 @@ function renderTreeItems(
             className={cn(
               navItemContentClassName,
               hasChildren ? "font-semibold tracking-tight" : "font-medium",
-              isActive
-                ? "text-sidebar-primary"
-                : hasChildren
-                  ? "text-sidebar-foreground group-hover:text-sidebar-accent-foreground"
-                  : "text-sidebar-foreground/80 group-hover:text-sidebar-accent-foreground",
+              getNavItemContentStateClassName(isActive, !isActive && isBranchActive, hasChildren),
             )}
           >
             <span className="truncate">{node.label}</span>
@@ -113,8 +140,7 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
             className={cn(
               navItemClassName,
               "cursor-pointer",
-              pathname === docsNavigation.overview.path &&
-                "bg-sidebar-primary/12 text-sidebar-primary",
+              getNavItemStateClassName(pathname === docsNavigation.overview.path, false),
             )}
             onAction={() => {
               void navigate(docsNavigation.overview!.path);
@@ -125,9 +151,11 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
                 className={cn(
                   navItemContentClassName,
                   "font-medium",
-                  pathname === docsNavigation.overview.path
-                    ? "text-sidebar-primary"
-                    : "text-sidebar-foreground/80 group-hover:text-sidebar-accent-foreground",
+                  getNavItemContentStateClassName(
+                    pathname === docsNavigation.overview.path,
+                    false,
+                    false,
+                  ),
                 )}
               >
                 <span className="truncate">{docsNavigation.overview.label}</span>
