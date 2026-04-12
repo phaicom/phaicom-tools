@@ -9,36 +9,25 @@ import "./app.css";
 export { Layout } from "@/layouts/main.layout";
 export { ErrorBoundary } from "./error";
 
-const GITHUB_API_URL = "https://api.github.com/repos/phaicom/phaicom-tools";
-
-async function getGithubStarCount() {
-  try {
-    const response = await fetch(GITHUB_API_URL, {
-      headers: {
-        Accept: "application/vnd.github+json",
-      },
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const data: { stargazers_count?: number } = await response.json();
-    return typeof data.stargazers_count === "number" ? data.stargazers_count : null;
-  } catch {
-    return null;
-  }
+export function meta() {
+  return [
+    { name: "robots", content: "index,follow" },
+    { name: "theme-color", content: "#f8f6fb" },
+    { name: "twitter:card", content: "summary" },
+    { property: "og:site_name", content: "Phaicom Tools" },
+    { property: "og:type", content: "website" },
+  ];
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return {
     theme: parseThemeCookie(request.headers.get("cookie")),
-    githubStarCount: await getGithubStarCount(),
   };
 }
 
 export function links() {
   return [
+    { rel: "manifest", href: "/manifest.webmanifest" },
     {
       rel: "preload",
       href: interLatinWoff2,

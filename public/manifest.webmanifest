@@ -1,0 +1,17 @@
+{
+  "name": "Phaicom Tools",
+  "short_name": "Phaicom Tools",
+  "description": "Beautiful developer utilities for daily work, from image conversion to CSS and Tailwind helpers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f6fb",
+  "theme_color": "#f8f6fb",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,14 +1,19 @@
+import { lazy, Suspense, useEffect, useState } from "react";
 import { LuGithub, LuMoon, LuStar, LuSun, LuSunMoon } from "react-icons/lu";
 import { Link, useLocation, useRouteLoaderData } from "react-router";
 
 import type { Theme } from "@/shared/components/theme/theme";
 
-import { DocsNavTrigger } from "@/features/docs";
 import { HeaderActionLink, HeaderActionToggle } from "@/shared/components/layout/HeaderAction";
 import { useTheme } from "@/shared/components/theme/ThemeProvider";
 import { HoverLabel } from "@/shared/components/ui/HoverLabel";
 
 const GITHUB_REPO_URL = "https://github.com/phaicom/phaicom-tools";
+const GITHUB_API_URL = "https://api.github.com/repos/phaicom/phaicom-tools";
+const DocsNavTrigger = lazy(async () => {
+  const module = await import("@/features/docs/components/DocsNavTrigger");
+  return { default: module.DocsNavTrigger };
+});
 
 function formatStarCount(count: number) {
   return new Intl.NumberFormat("en", {
@@ -20,17 +25,68 @@ function formatStarCount(count: number) {
 export const Header = () => {
   const location = useLocation();
   const { isDark, isReady, theme, toggleTheme } = useTheme();
-  const rootData = useRouteLoaderData<{ theme: Theme | null; githubStarCount: number | null }>(
-    "root",
-  );
-  const starCount = rootData?.githubStarCount ?? null;
+  useRouteLoaderData<{ theme: Theme | null }>("root");
+  const [starCount, setStarCount] = useState<number | null>(null);
   const isExactHome = location.pathname === "/";
   const isDocsRoute = location.pathname.startsWith("/docs");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadStarCount = async () => {
+      try {
+        const response = await fetch(GITHUB_API_URL, {
+          headers: {
+            Accept: "application/vnd.github+json",
+          },
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          return;
+        }
+
+        const data: { stargazers_count?: number } = await response.json();
+
+        if (typeof data.stargazers_count === "number") {
+          setStarCount(data.stargazers_count);
+        }
+      } catch {
+        // Ignore non-critical GitHub metadata failures.
+      }
+    };
+
+    const idleCallback =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback(
+            () => {
+              void loadStarCount();
+            },
+            { timeout: 1500 },
+          )
+        : window.setTimeout(() => {
+            void loadStarCount();
+          }, 600);
+
+    return () => {
+      controller.abort();
+
+      if (typeof idleCallback === "number") {
+        window.clearTimeout(idleCallback);
+      } else if (typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(idleCallback);
+      }
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-primary-foreground">
       <div className="mx-auto flex h-14 w-full max-w-screen-2xl items-center gap-2 px-4 md:px-6 xl:px-8">
-        {isDocsRoute ? <DocsNavTrigger pathname={location.pathname} /> : null}
+        {isDocsRoute ? (
+          <Suspense fallback={null}>
+            <DocsNavTrigger pathname={location.pathname} />
+          </Suspense>
+        ) : null}
 
         <Link
           to="/"
