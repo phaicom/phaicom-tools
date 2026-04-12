@@ -9,9 +9,31 @@ import "./app.css";
 export { Layout } from "@/layouts/main.layout";
 export { ErrorBoundary } from "./error";
 
-export function loader({ request }: LoaderFunctionArgs) {
+const GITHUB_API_URL = "https://api.github.com/repos/phaicom/phaicom-tools";
+
+async function getGithubStarCount() {
+  try {
+    const response = await fetch(GITHUB_API_URL, {
+      headers: {
+        Accept: "application/vnd.github+json",
+      },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data: { stargazers_count?: number } = await response.json();
+    return typeof data.stargazers_count === "number" ? data.stargazers_count : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
   return {
     theme: parseThemeCookie(request.headers.get("cookie")),
+    githubStarCount: await getGithubStarCount(),
   };
 }
 

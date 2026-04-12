@@ -1,13 +1,30 @@
-import { LuGithub, LuMoon, LuSun, LuSunMoon } from "react-icons/lu";
-import { Link, useLocation } from "react-router";
+import { TooltipTrigger } from "react-aria-components";
+import { LuGithub, LuMoon, LuStar, LuSun, LuSunMoon } from "react-icons/lu";
+import { Link, useLocation, useRouteLoaderData } from "react-router";
+
+import type { Theme } from "@/shared/components/theme/theme";
 
 import { DocsNavTrigger } from "@/features/docs";
 import { HeaderActionLink, HeaderActionToggle } from "@/shared/components/layout/HeaderAction";
 import { useTheme } from "@/shared/components/theme/ThemeProvider";
+import { Tooltip } from "@/shared/components/ui/Tooltip";
+
+const GITHUB_REPO_URL = "https://github.com/phaicom/phaicom-tools";
+
+function formatStarCount(count: number) {
+  return new Intl.NumberFormat("en", {
+    notation: count >= 1000 ? "compact" : "standard",
+    maximumFractionDigits: count >= 1000 ? 1 : 0,
+  }).format(count);
+}
 
 export const Header = () => {
   const location = useLocation();
   const { isDark, isReady, theme, toggleTheme } = useTheme();
+  const rootData = useRouteLoaderData<{ theme: Theme | null; githubStarCount: number | null }>(
+    "root",
+  );
+  const starCount = rootData?.githubStarCount ?? null;
   const isExactHome = location.pathname === "/";
   const isDocsRoute = location.pathname.startsWith("/docs");
 
@@ -29,21 +46,32 @@ export const Header = () => {
         </Link>
 
         <div className="ml-auto flex items-center gap-2">
-          <HeaderActionLink
-            href="https://github.com/phaicom/phaicom-tools"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open the project GitHub repository in a new tab"
-            className="w-10 px-0"
-          >
-            <LuGithub aria-hidden="true" />
-          </HeaderActionLink>
+          <TooltipTrigger delay={150}>
+            <HeaderActionLink
+              href={GITHUB_REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={
+                starCount === null
+                  ? "View the project on GitHub"
+                  : `View the project on GitHub. ${starCount} stars`
+              }
+              className="min-w-0 gap-1.5 px-2.5 sm:px-3"
+            >
+              <LuGithub aria-hidden="true" />
+              <span className="inline-flex items-center gap-1">
+                <LuStar aria-hidden="true" className="size-3.5" />
+                {starCount === null ? null : <span>{formatStarCount(starCount)}</span>}
+              </span>
+            </HeaderActionLink>
+            <Tooltip>View on GitHub</Tooltip>
+          </TooltipTrigger>
 
           <HeaderActionToggle
             isSelected={isDark}
             onChange={toggleTheme}
             aria-label={isReady ? `Switch to ${isDark ? "light" : "dark"} theme` : "Toggle theme"}
-            className="min-w-24 justify-start sm:min-w-28"
+            className="min-w-0 gap-1.5 px-2.5 sm:px-3"
           >
             {!isReady ? (
               <LuSunMoon aria-hidden="true" />
