@@ -24,9 +24,6 @@ export function GradientToTailwindPage() {
   return (
     <div className="space-y-8">
       <header className="space-y-4">
-        <p className="text-[11px] font-semibold tracking-[0.22em] text-muted-foreground uppercase">
-          Developer Tool
-        </p>
         <div className="space-y-3">
           <h1>Gradient to Tailwind</h1>
           <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
