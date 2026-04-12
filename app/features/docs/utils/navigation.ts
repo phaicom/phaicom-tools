@@ -53,6 +53,14 @@ export const docsNavigation = {
   items: docsPages,
 };
 
+export function normalizeDocsPath(pathname: string) {
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    return pathname.replace(/\/+$/, "");
+  }
+
+  return pathname;
+}
+
 function toTitleCase(segment: string) {
   return segment
     .replace(/[-_]/g, " ")
@@ -63,11 +71,13 @@ function toTitleCase(segment: string) {
 }
 
 export function getDocsBreadcrumbs(pathname: string) {
-  if (!pathname.startsWith("/docs")) {
+  const normalizedPathname = normalizeDocsPath(pathname);
+
+  if (!normalizedPathname.startsWith("/docs")) {
     return [] satisfies DocsBreadcrumb[];
   }
 
-  if (pathname === "/docs") {
+  if (normalizedPathname === "/docs") {
     return [
       {
         label: "Docs",
@@ -77,7 +87,7 @@ export function getDocsBreadcrumbs(pathname: string) {
     ] satisfies DocsBreadcrumb[];
   }
 
-  const currentPage = docsPagesByPath.get(pathname);
+  const currentPage = docsPagesByPath.get(normalizedPathname);
 
   return [
     {
@@ -86,7 +96,7 @@ export function getDocsBreadcrumbs(pathname: string) {
       isCurrent: false,
     },
     {
-      label: currentPage?.label ?? toTitleCase(pathname.replace(/^\/docs\/?/, "")),
+      label: currentPage?.label ?? toTitleCase(normalizedPathname.replace(/^\/docs\/?/, "")),
       path: currentPage?.path,
       isCurrent: true,
     },

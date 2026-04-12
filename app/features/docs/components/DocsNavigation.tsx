@@ -2,7 +2,11 @@
 
 import { useNavigate } from "react-router";
 
-import { docsNavigation, type DocsNavNode } from "@/features/docs/utils/navigation";
+import {
+  docsNavigation,
+  normalizeDocsPath,
+  type DocsNavNode,
+} from "@/features/docs/utils/navigation";
 import { Tree, TreeItem } from "@/shared/components/ui/Tree";
 import { cn } from "@/shared/utils/cn";
 
@@ -116,6 +120,7 @@ function renderTreeItems(
 
 export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigationProps) {
   const navigate = useNavigate();
+  const normalizedPathname = normalizeDocsPath(pathname);
 
   return (
     <nav className={className} aria-label="Documentation">
@@ -140,7 +145,7 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
             className={cn(
               navItemClassName,
               "cursor-pointer",
-              getNavItemStateClassName(pathname === docsNavigation.overview.path, false),
+              getNavItemStateClassName(normalizedPathname === docsNavigation.overview.path, false),
             )}
             onAction={() => {
               void navigate(docsNavigation.overview!.path);
@@ -152,7 +157,7 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
                   navItemContentClassName,
                   "font-medium",
                   getNavItemContentStateClassName(
-                    pathname === docsNavigation.overview.path,
+                    normalizedPathname === docsNavigation.overview.path,
                     false,
                     false,
                   ),
@@ -164,7 +169,7 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
           />
         ) : null}
 
-        {renderTreeItems(docsNavigation.items, pathname, navigate, onNavigate)}
+        {renderTreeItems(docsNavigation.items, normalizedPathname, navigate, onNavigate)}
       </Tree>
     </nav>
   );
