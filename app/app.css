@@ -219,6 +219,66 @@ body {
 
 /* Header Hemp Utilities */
 @layer utilities {
+  .prose-surface {
+    @apply text-foreground;
+  }
+
+  .prose-surface > :first-child {
+    margin-top: 0;
+  }
+
+  .prose-surface > :last-child {
+    margin-bottom: 0;
+  }
+
+  .prose-surface h1,
+  .prose-surface h2,
+  .prose-surface h3 {
+    @apply mt-8 mb-3 scroll-m-20;
+  }
+
+  .prose-surface p,
+  .prose-surface ul,
+  .prose-surface ol,
+  .prose-surface blockquote,
+  .prose-surface pre,
+  .prose-surface table {
+    @apply my-4;
+  }
+
+  .prose-surface ul,
+  .prose-surface ol {
+    @apply pl-6;
+  }
+
+  .prose-surface li + li {
+    @apply mt-1.5;
+  }
+
+  .prose-surface .rounded-callout {
+    @apply rounded-2xl border border-primary/20 bg-accent/45 px-4 py-3;
+  }
+
+  .markdown-editor-shell .mdxeditor-toolbar {
+    @apply sticky top-0 z-10;
+  }
+
+  .mdxeditor-popup-container {
+    z-index: 60;
+  }
+
+  .markdown-editor-shell .mdxeditor-root-contenteditable,
+  .markdown-editor-shell .mdxeditor-source-editor {
+    @apply min-h-[23rem];
+  }
+
+  .markdown-editor-shell .mdxeditor-popup-container,
+  .markdown-editor-shell .mdxeditor-select-content,
+  .markdown-editor-shell .mdxeditor-toolbar button,
+  .markdown-editor-shell .mdxeditor-toolbar select {
+    @apply text-sm;
+  }
+
   @keyframes rainbowIcon {
     0% {
       filter: hue-rotate(0deg) brightness(1.4) saturate(1.4);
