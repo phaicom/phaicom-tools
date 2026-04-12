@@ -1,5 +1,3 @@
-import Link from "@tiptap/extension-link";
-import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
 
 export function createBaseExtensions() {
@@ -8,17 +6,17 @@ export function createBaseExtensions() {
       heading: {
         levels: [1, 2, 3],
       },
-    }),
-    Underline,
-    Link.configure({
-      autolink: true,
-      defaultProtocol: "https",
-      HTMLAttributes: {
-        rel: null,
-        target: null,
+      link: {
+        autolink: true,
+        defaultProtocol: "https",
+        HTMLAttributes: {
+          rel: null,
+          target: null,
+        },
+        openOnClick: false,
+        protocols: ["http", "https", "mailto", "tel"],
       },
-      openOnClick: false,
-      protocols: ["http", "https", "mailto", "tel"],
+      underline: {},
     }),
   ];
 }
