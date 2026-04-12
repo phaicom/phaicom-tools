@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from "react-router";
 
-import { DocsBreadcrumbs } from "@/components/docs/DocsBreadcrumbs";
-import { DocsSidebar } from "@/components/docs/DocsSidebar";
+import { DocsBreadcrumbs, DocsSidebar } from "@/features/docs";
 
 export function meta() {
   return [

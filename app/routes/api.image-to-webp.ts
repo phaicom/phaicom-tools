@@ -1,15 +1,7 @@
-import { WEBP_ZIP_FILENAME, normalizeQuality } from "@/utils/image-to-webp/shared";
+import type { CreateZipRequestPayload } from "@/features/image-to-webp/types";
 
-type ConvertedImagePayload = {
-  dataBase64: string;
-  fileName: string;
-  size: number;
-};
-
-type CreateZipRequestPayload = {
-  convertedFiles: Array<Pick<ConvertedImagePayload, "dataBase64" | "fileName">>;
-  intent: "create-zip";
-};
+import { WEBP_ZIP_FILENAME } from "@/features/image-to-webp/constants";
+import { normalizeQuality } from "@/features/image-to-webp/utils/file";
 
 export async function action({ request }: { request: Request }) {
   if (request.method.toUpperCase() === "GET") {
@@ -30,7 +22,8 @@ export async function action({ request }: { request: Request }) {
   const contentType = request.headers.get("content-type") ?? "";
 
   if (contentType.includes("application/json")) {
-    const { createZipArchive } = await import("@/utils/image-to-webp/zip.server");
+    const { createZipArchive } =
+      await import("@/features/image-to-webp/services/image-to-webp-zip.server");
     const payload = (await request.json()) as Partial<CreateZipRequestPayload>;
 
     if (payload.intent !== "create-zip") {
@@ -83,7 +76,8 @@ export async function action({ request }: { request: Request }) {
     }
 
     try {
-      const { convertImageFileToWebp } = await import("@/utils/image-to-webp/server");
+      const { convertImageFileToWebp } =
+        await import("@/features/image-to-webp/services/image-to-webp.server");
       const converted = await convertImageFileToWebp(file, {
         quality: normalizeQuality(formData.get("quality")),
       });

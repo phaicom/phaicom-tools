@@ -1,9 +1,9 @@
 import { useLocale } from "react-aria-components";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 
-import { ConsoleEasterEgg } from "@/components/ConsoleEasterEgg";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Footer } from "@/shared/components/layout/Footer";
+import { Header } from "@/shared/components/layout/Header";
+import { ConsoleEasterEgg } from "@/shared/components/misc/ConsoleEasterEgg";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { locale, direction } = useLocale();

@@ -1,8 +1,8 @@
 import { SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { Link } from "react-router";
 
-import { button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { button } from "@/shared/components/ui/Button";
+import { cn } from "@/shared/utils/cn";
 
 export function meta() {
   return [
