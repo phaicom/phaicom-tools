@@ -34,16 +34,16 @@ export function MarkdownPreviewPane({ markdown }: MarkdownPreviewPaneProps) {
     <Group
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
-      className="flex h-full min-h-[32rem] flex-col overflow-hidden rounded-sm border border-border/70 bg-card/85 shadow-xs backdrop-blur"
+      className="flex h-full min-h-[36rem] flex-col overflow-hidden"
     >
-      <div className="border-b border-border/70 px-5 py-4">
+      <div className="border-b border-border/60 px-1 py-3">
         <Heading id={titleId} className="text-base font-semibold tracking-tight">
           HTML Output
         </Heading>
       </div>
 
-      <div className="min-h-0 flex-1 bg-background/70 p-4">
-        <pre className="h-full min-h-[27rem] overflow-auto rounded-sm border border-border/70 bg-background px-5 py-4 font-mono text-sm leading-7 whitespace-pre-wrap text-foreground shadow-none">
+      <div className="min-h-0 flex-1 pt-3">
+        <pre className="h-full min-h-[31rem] overflow-auto bg-background px-4 py-4 font-mono text-sm leading-7 whitespace-pre-wrap text-foreground shadow-none md:px-5">
           <code>{htmlOutput}</code>
         </pre>
       </div>

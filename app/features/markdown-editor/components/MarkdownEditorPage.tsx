@@ -15,20 +15,17 @@ export function MarkdownEditorPage() {
   const { copied, copyMarkdown, markdown, resetMarkdown, setMarkdown } = useMarkdown();
 
   return (
-    <div className="space-y-8">
+    <div className="flex h-full min-h-0 flex-col gap-5">
       <header className="space-y-4">
         <div className="space-y-3">
           <h1>Markdown Editor</h1>
-          <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+          <p className="max-w-4xl text-sm leading-6 text-muted-foreground">
             Write Markdown in a rich editor, mix in raw HTML tags when you need them, and inspect
             the generated HTML source instantly beside it.
           </p>
         </div>
 
-        <Group
-          aria-label="Markdown editor actions"
-          className="rounded-sm border border-border/70 bg-card/80 p-3 shadow-xs backdrop-blur"
-        >
+        <Group aria-label="Markdown editor actions" className="border-b border-border/60 pb-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-end">
             <Toolbar aria-label="Document actions" className="w-full md:w-auto md:justify-end">
               <Button
@@ -62,7 +59,7 @@ export function MarkdownEditorPage() {
         </Group>
       </header>
 
-      <section className="grid gap-6 xl:grid-cols-2">
+      <section className="grid flex-1 gap-4 min-[1500px]:grid-cols-2">
         <MarkdownEditorPane markdown={markdown} onChange={setMarkdown} />
         <MarkdownPreviewPane markdown={markdown} />
       </section>

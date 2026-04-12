@@ -141,17 +141,17 @@ export function MarkdownEditorPane({ markdown, onChange }: MarkdownEditorPanePro
     <Group
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
-      className="flex h-full min-h-[32rem] flex-col overflow-hidden rounded-sm border border-border/70 bg-card/85 shadow-xs backdrop-blur"
+      className="flex h-full min-h-[36rem] flex-col overflow-hidden"
     >
-      <div className="border-b border-border/70 px-5 py-4">
+      <div className="border-b border-border/60 px-1 py-3">
         <Heading id={titleId} className="text-base font-semibold tracking-tight">
           Editor
         </Heading>
       </div>
 
-      <div className="min-h-0 flex-1 bg-background/70 p-4">
+      <div className="min-h-0 flex-1 pt-3">
         {isMounted ? (
-          <div className="markdown-editor-shell h-full min-h-[27rem] rounded-sm border border-border/70 bg-background shadow-none">
+          <div className="markdown-editor-shell h-full min-h-[31rem] bg-background shadow-none">
             <MDXEditor
               ref={editorRef}
               markdown={markdown}
@@ -165,7 +165,7 @@ export function MarkdownEditorPane({ markdown, onChange }: MarkdownEditorPanePro
               placeholder="Start writing Markdown or paste HTML-enhanced content here."
               className="markdown-editor-instance"
               contentEditableClassName={cn(
-                "markdown-editor-content prose-surface min-h-[23rem] px-5 py-4 text-sm text-foreground outline-none",
+                "markdown-editor-content prose-surface min-h-[31rem] px-4 py-4 text-sm text-foreground outline-none md:px-5",
                 "[&_a]:text-primary [&_a]:underline-offset-4",
                 "[&_blockquote]:border-l-3 [&_blockquote]:border-primary/35 [&_blockquote]:pl-4 [&_blockquote]:text-muted-foreground",
                 "[&_code]:rounded-xs [&_code]:bg-secondary [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[0.92em]",
@@ -177,7 +177,7 @@ export function MarkdownEditorPane({ markdown, onChange }: MarkdownEditorPanePro
             />
           </div>
         ) : (
-          <div className="prose-surface h-full min-h-[27rem] overflow-auto rounded-sm border border-border/70 bg-background px-5 py-4 text-sm text-muted-foreground shadow-none">
+          <div className="prose-surface h-full min-h-[31rem] overflow-auto bg-background px-4 py-4 text-sm text-muted-foreground shadow-none md:px-5">
             <pre className="font-mono text-sm leading-7 whitespace-pre-wrap">{markdown}</pre>
           </div>
         )}
