@@ -1,87 +1,93 @@
-# Welcome to React Router!
+# Phaicom Tools
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Phaicom Tools is a small collection of polished developer utilities built with React Router, React 19, TypeScript, and Tailwind CSS.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+Right now the app includes:
 
-## Features
+- `Gradient to Tailwind`: converts CSS gradients into Tailwind utility classes
+- `Image to WebP`: batch converts images to WebP with `sharp`
+- `HTML Editor`: a split-screen TipTap editor with live preview and HTML output
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Tech Stack
+
+- React Router v7 with SSR enabled
+- React 19 + TypeScript
+- Tailwind CSS v4
+- React Aria components
+- Bun for package management and script execution
 
 ## Getting Started
 
-### Installation
+### Prerequisites
 
-Install the dependencies:
+- Bun `1.3.12` or later
 
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
+### Install
 
 ```bash
-npm run dev
+bun install
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+### Run in development
 
 ```bash
-npm run build
+bun run dev
 ```
 
-## Deployment
+The app runs at `http://localhost:5173`.
 
-### Docker Deployment
-
-To build and run using Docker:
+## Available Scripts
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+bun run dev
+bun run build
+bun run start
+bun run typecheck
+bun run lint
+bun run lint:fix
+bun run fmt
+bun run fmt:check
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+## Project Structure
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+```text
+app/
+  features/      Feature-specific UI, hooks, utils, and services
+  routes/        React Router route modules
+  shared/        Reusable UI components and shared helpers
+  layouts/       App layouts
+public/          Static assets
 ```
 
-## Styling
+## Routing Notes
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+- `/` is the landing page
+- `/docs` is the documentation hub
+- `/docs/gradient-to-tailwind` shows the gradient converter
+- `/docs/image-to-webp` shows the image conversion tool
+- `/docs/editor` shows the HTML editor
 
----
+SSR is enabled, and the React Router config prerenders the home page plus docs routes.
 
-Built with ❤️ using React Router.
+## Linting and Formatting
+
+This project uses:
+
+- `oxlint` for linting
+- `oxfmt` for formatting
+- `simple-git-hooks` + `lint-staged` for pre-commit checks
+
+## Build
+
+Create a production build with:
+
+```bash
+bun run build
+```
+
+Then serve it locally with:
+
+```bash
+bun run start
+```
