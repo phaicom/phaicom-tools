@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { cn } from "@/shared/utils/cn";
 
-import { formatHtmlDocument } from "../utils/formatHtmlDocument";
+import { formatHtmlSourceDocument } from "../utils/htmlDocument";
 import { EditorPanel } from "./EditorPanel";
 
 type HtmlSourcePaneProps = {
@@ -13,7 +13,7 @@ type HtmlSourcePaneProps = {
 };
 
 export function HtmlSourcePane({ className, html }: HtmlSourcePaneProps) {
-  const formattedHtml = useMemo(() => formatHtmlDocument(html), [html]);
+  const formattedHtml = useMemo(() => formatHtmlSourceDocument(html), [html]);
 
   return (
     <EditorPanel

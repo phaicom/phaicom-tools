@@ -37,8 +37,6 @@ export default function Home() {
           Get Started
         </Link>
       </div>
-
-      {/* Tech Icons */}
       <div className="mt-10 flex flex-row justify-center gap-6">
         {[SiReact, SiTypescript, SiTailwindcss].map((Icon) => (
           <Icon

@@ -10,6 +10,11 @@ export type BatchNotice = {
   tone: BatchNoticeTone;
 };
 
+export type ImageFileSelection = {
+  files: File[];
+  messages: string[];
+};
+
 export type ImageBatchItem = {
   convertedSize?: number;
   errorMessage?: string;

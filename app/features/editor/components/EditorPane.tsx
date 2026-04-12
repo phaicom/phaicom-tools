@@ -1,15 +1,13 @@
 "use client";
 
 import { EditorContent, useEditor } from "@tiptap/react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { TextArea, TextField } from "react-aria-components";
 
 import { cn } from "@/shared/utils/cn";
 
 import { createBaseExtensions } from "../extensions/baseExtensions";
-import { formatHtmlDocument } from "../utils/formatHtmlDocument";
-import { normalizeHtmlDocument } from "../utils/htmlDocument";
-import { sanitizeHtml } from "../utils/sanitizeHtml";
+import { useEditorDocumentLifecycle } from "../hooks/useEditorDocumentLifecycle";
 import { EditorModeTabs, type EditorMode } from "./EditorModeTabs";
 import { EditorPanel } from "./EditorPanel";
 import { EditorToolbar } from "./EditorToolbar";
@@ -23,7 +21,6 @@ const baseExtensions = createBaseExtensions();
 
 export function EditorPane({ html, onChange }: EditorPaneProps) {
   const [mode, setMode] = useState<EditorMode>("rich-text");
-  const previousModeRef = useRef<EditorMode>(mode);
   const editor = useEditor({
     content: html,
     editorProps: {
@@ -42,53 +39,7 @@ export function EditorPane({ html, onChange }: EditorPaneProps) {
     },
   });
 
-  useEffect(() => {
-    if (!editor) {
-      return;
-    }
-
-    if (mode !== "rich-text") {
-      return;
-    }
-
-    const currentHtml = normalizeHtmlDocument(editor.getHTML());
-    const nextHtml = normalizeHtmlDocument(html);
-
-    if (currentHtml !== nextHtml) {
-      editor.commands.setContent(nextHtml, { emitUpdate: false });
-    }
-  }, [editor, html, mode]);
-
-  useEffect(() => {
-    if (!editor) {
-      previousModeRef.current = mode;
-      return;
-    }
-
-    const previousMode = previousModeRef.current;
-    previousModeRef.current = mode;
-
-    if (previousMode === "rich-text" && mode === "html") {
-      const formattedHtml = normalizeHtmlDocument(formatHtmlDocument(html));
-
-      if (formattedHtml !== html) {
-        onChange(formattedHtml);
-      }
-
-      return;
-    }
-
-    if (previousMode === mode || previousMode !== "html" || mode !== "rich-text") {
-      return;
-    }
-
-    const sanitizedHtml = normalizeHtmlDocument(sanitizeHtml(html));
-    editor.commands.setContent(sanitizedHtml, { emitUpdate: false });
-
-    if (sanitizedHtml !== html) {
-      onChange(sanitizedHtml);
-    }
-  }, [editor, html, mode, onChange]);
+  useEditorDocumentLifecycle({ editor, html, mode, onChange });
 
   return (
     <EditorPanel

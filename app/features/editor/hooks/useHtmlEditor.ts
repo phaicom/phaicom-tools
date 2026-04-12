@@ -2,6 +2,8 @@
 
 import { useDeferredValue, useEffect, useState } from "react";
 
+import { useClipboardFeedback } from "@/shared/hooks/useClipboardFeedback";
+
 import {
   DEFAULT_DOCUMENT_HTML,
   EDITOR_STORAGE_KEY,
@@ -12,7 +14,7 @@ export function useHtmlEditor() {
   const [html, setHtml] = useState(DEFAULT_DOCUMENT_HTML);
   const [hasLoadedInitialValue, setHasLoadedInitialValue] = useState(false);
   const deferredHtml = useDeferredValue(html);
-  const [copied, setCopied] = useState(false);
+  const { copied, copyText, resetCopied } = useClipboardFeedback();
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -36,32 +38,18 @@ export function useHtmlEditor() {
     window.localStorage.setItem(EDITOR_STORAGE_KEY, html);
   }, [hasLoadedInitialValue, html]);
 
-  useEffect(() => {
-    if (!copied) {
-      return undefined;
-    }
-
-    const timeoutId = window.setTimeout(() => setCopied(false), 1800);
-    return () => window.clearTimeout(timeoutId);
-  }, [copied]);
-
   function updateHtml(nextHtml: string) {
     setHtml(normalizeHtmlDocument(nextHtml));
-    setCopied(false);
+    resetCopied();
   }
 
   function resetHtml() {
     setHtml(DEFAULT_DOCUMENT_HTML);
-    setCopied(false);
+    resetCopied();
   }
 
   async function copyHtml() {
-    if (!html || typeof navigator === "undefined" || !navigator.clipboard) {
-      return;
-    }
-
-    await navigator.clipboard.writeText(html);
-    setCopied(true);
+    await copyText(html);
   }
 
   return {

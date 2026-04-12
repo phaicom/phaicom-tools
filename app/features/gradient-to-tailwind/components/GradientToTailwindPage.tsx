@@ -1,5 +1,6 @@
 import { Label, TextArea, TextField } from "react-aria-components";
 
+import { PageIntro } from "@/shared/components/content/PageIntro";
 import { cn } from "@/shared/utils/cn";
 
 import { MODE_CONTENT } from "../constants";
@@ -23,14 +24,10 @@ export function GradientToTailwindPage() {
 
   return (
     <div className="space-y-8">
-      <header className="space-y-4">
-        <div className="space-y-3">
-          <h1>Gradient to Tailwind</h1>
-          <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-            Convert CSS gradients into concise Tailwind classes for backgrounds and text.
-          </p>
-        </div>
-      </header>
+      <PageIntro
+        title="Gradient to Tailwind"
+        description="Convert CSS gradients into concise Tailwind classes for backgrounds and text."
+      />
 
       <ConverterModeTabs
         mode={mode}

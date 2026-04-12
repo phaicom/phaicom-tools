@@ -2,54 +2,32 @@
 
 import type { ComponentProps } from "react";
 
-import { FileTrigger, isDirectoryDropItem, isFileDropItem } from "react-aria-components";
+import { FileTrigger } from "react-aria-components";
 import { LuFolderUp, LuImages } from "react-icons/lu";
 
 import { Button } from "@/shared/components/ui/Button";
 import { DropZone } from "@/shared/components/ui/DropZone";
 import { cn } from "@/shared/utils/cn";
 
-import { ACCEPTED_IMAGE_EXTENSIONS } from "../constants";
+import type { ImageFileSelection } from "../types";
 
-type AddFilesResult = {
-  files: File[];
-  messages: string[];
-};
+import { ACCEPTED_IMAGE_EXTENSIONS } from "../constants";
+import { collectDroppedImageFiles, createImageFileSelection } from "../utils/fileSelection";
 
 type ImageDropZoneProps = {
   disabled?: boolean;
-  onAddFiles: (result: AddFilesResult) => void;
+  onAddFiles: (result: ImageFileSelection) => void;
 };
 
 export function ImageDropZone({ disabled = false, onAddFiles }: ImageDropZoneProps) {
   async function handleDrop(
     event: Parameters<NonNullable<ComponentProps<typeof DropZone>["onDrop"]>>[0],
   ) {
-    const files: File[] = [];
-    const messages: string[] = [];
-
-    for (const item of event.items) {
-      if (isFileDropItem(item)) {
-        files.push(await item.getFile());
-        continue;
-      }
-
-      if (isDirectoryDropItem(item)) {
-        messages.push(`Skipped folder "${item.name}". Folder uploads are not supported yet.`);
-        continue;
-      }
-
-      messages.push("Skipped one dropped item because it was not a file.");
-    }
-
-    onAddFiles({ files, messages });
+    onAddFiles(await collectDroppedImageFiles(event.items));
   }
 
   function handleSelect(files: FileList | null) {
-    onAddFiles({
-      files: files ? Array.from(files) : [],
-      messages: [],
-    });
+    onAddFiles(createImageFileSelection(files));
   }
 
   return (
@@ -76,12 +54,12 @@ export function ImageDropZone({ disabled = false, onAddFiles }: ImageDropZonePro
             <div className="space-y-2">
               <div className="space-y-1">
                 <h2 className="text-lg font-semibold tracking-tight">Drop images here</h2>
-                <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
-                  Drop images or click to upload. Supports:{" "}
-                  <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
-                    {ACCEPTED_IMAGE_EXTENSIONS.join("  ")}
+                <div className="max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
+                  <p>Drop images or click to upload.</p>
+                  <p className="text-xs font-medium tracking-[0.18em] uppercase">
+                    Supports {ACCEPTED_IMAGE_EXTENSIONS.join("  ")}
                   </p>
-                </p>
+                </div>
               </div>
             </div>
           </div>

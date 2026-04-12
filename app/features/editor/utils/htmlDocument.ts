@@ -1,5 +1,7 @@
-export const EDITOR_STORAGE_KEY = "phaicom-tools:editor:html-draft";
+import { formatHtmlDocument } from "./formatHtmlDocument";
+import { sanitizeHtml } from "./sanitizeHtml";
 
+export const EDITOR_STORAGE_KEY = "phaicom-tools:editor:html-draft";
 export const DEFAULT_DOCUMENT_HTML = "";
 const LEGACY_SAMPLE_DOCUMENT_HTML = `
 <h1>Quick Note</h1>
@@ -25,4 +27,12 @@ export function normalizeHtmlDocument(html: string) {
   }
 
   return normalized;
+}
+
+export function formatHtmlSourceDocument(html: string) {
+  return normalizeHtmlDocument(formatHtmlDocument(html));
+}
+
+export function sanitizeEditorHtmlDocument(html: string) {
+  return normalizeHtmlDocument(sanitizeHtml(html));
 }
