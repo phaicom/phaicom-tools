@@ -1,26 +1,39 @@
 import { useLocale } from "react-aria-components";
-import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
+import { Links, Meta, Scripts, ScrollRestoration, useRouteLoaderData } from "react-router";
 
 import { Footer } from "@/shared/components/layout/Footer";
 import { Header } from "@/shared/components/layout/Header";
 import { ConsoleEasterEgg } from "@/shared/components/misc/ConsoleEasterEgg";
-import { getThemeScript } from "@/shared/components/theme/theme";
+import {
+  getThemeCriticalStyles,
+  getThemeScript,
+  type Theme,
+} from "@/shared/components/theme/theme";
 import { ThemeProvider } from "@/shared/components/theme/ThemeProvider";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { locale, direction } = useLocale();
+  const rootData = useRouteLoaderData<{ theme: Theme | null }>("root");
+  const initialTheme = rootData?.theme ?? null;
 
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning>
+    <html
+      lang={locale}
+      dir={direction}
+      className={initialTheme === "dark" ? "dark" : undefined}
+      suppressHydrationWarning
+      style={{ colorScheme: initialTheme ?? "light" }}
+    >
       <head>
         <meta charSet="utf-8" />
+        <script dangerouslySetInnerHTML={{ __html: getThemeScript() }} />
+        <style dangerouslySetInnerHTML={{ __html: getThemeCriticalStyles() }} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <script dangerouslySetInnerHTML={{ __html: getThemeScript() }} />
       </head>
       <body className="flex min-h-svh flex-col">
-        <ThemeProvider>
+        <ThemeProvider initialTheme={initialTheme}>
           <ConsoleEasterEgg />
           <Header />
           {children}

@@ -1,11 +1,19 @@
 import interLatinWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2";
 import sourceCodeProLatinWoff2 from "@fontsource-variable/source-code-pro/files/source-code-pro-latin-wght-normal.woff2";
-import { Outlet } from "react-router";
+import { Outlet, type LoaderFunctionArgs } from "react-router";
+
+import { parseThemeCookie } from "@/shared/components/theme/theme";
 
 import "./app.css";
 
 export { Layout } from "@/layouts/main.layout";
 export { ErrorBoundary } from "./error";
+
+export function loader({ request }: LoaderFunctionArgs) {
+  return {
+    theme: parseThemeCookie(request.headers.get("cookie")),
+  };
+}
 
 export function links() {
   return [

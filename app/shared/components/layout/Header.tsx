@@ -1,4 +1,4 @@
-import { LuGithub, LuMoon, LuSun } from "react-icons/lu";
+import { LuGithub, LuMoon, LuSun, LuSunMoon } from "react-icons/lu";
 import { Link, useLocation } from "react-router";
 
 import { DocsNavTrigger } from "@/features/docs";
@@ -7,7 +7,7 @@ import { useTheme } from "@/shared/components/theme/ThemeProvider";
 
 export const Header = () => {
   const location = useLocation();
-  const { isDark, theme, toggleTheme } = useTheme();
+  const { isDark, isReady, theme, toggleTheme } = useTheme();
   const isExactHome = location.pathname === "/";
   const isDocsRoute = location.pathname.startsWith("/docs");
 
@@ -42,11 +42,17 @@ export const Header = () => {
           <HeaderActionToggle
             isSelected={isDark}
             onChange={toggleTheme}
-            aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
+            aria-label={isReady ? `Switch to ${isDark ? "light" : "dark"} theme` : "Toggle theme"}
             className="min-w-24 justify-start sm:min-w-28"
           >
-            {isDark ? <LuMoon aria-hidden="true" /> : <LuSun aria-hidden="true" />}
-            <span>{theme === "dark" ? "Dark" : "Light"}</span>
+            {!isReady ? (
+              <LuSunMoon aria-hidden="true" />
+            ) : isDark ? (
+              <LuMoon aria-hidden="true" />
+            ) : (
+              <LuSun aria-hidden="true" />
+            )}
+            <span>{!isReady ? "Theme" : theme === "dark" ? "Dark" : "Light"}</span>
           </HeaderActionToggle>
         </div>
       </div>
