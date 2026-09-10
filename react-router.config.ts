@@ -9,6 +9,13 @@ export default {
     const staticPaths = getStaticPaths();
     const docsPaths = staticPaths.filter((path) => path === "/docs" || path.startsWith("/docs/"));
 
-    return ["/", "/tools", "/tools/compress-image-to-size", ...docsPaths];
+    return [
+      "/",
+      "/tools",
+      "/tools/compress-image-to-size",
+      "/tools/html-playground",
+      "/tools/html-minifier",
+      ...docsPaths,
+    ];
   },
 } satisfies Config;

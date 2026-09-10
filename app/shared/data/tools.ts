@@ -14,6 +14,26 @@ export type Tool = {
 export const tools = [
   {
     category: "Code & CSS",
+    description: "Minify HTML safely in your browser, then copy or download the optimized result.",
+    featured: true,
+    icon: "code",
+    path: "/tools/html-minifier",
+    shortName: "HTML Minifier",
+    tags: ["html", "minifier", "compress", "optimize", "developer"],
+    title: "HTML Minifier",
+  },
+  {
+    category: "Code & CSS",
+    description: "Write and run HTML, CSS, and JavaScript with an instant sandboxed preview.",
+    featured: true,
+    icon: "code",
+    path: "/tools/html-playground",
+    shortName: "HTML Playground",
+    tags: ["html", "css", "javascript", "editor", "playground", "developer"],
+    title: "HTML Playground",
+  },
+  {
+    category: "Code & CSS",
     description: "Convert CSS gradients into concise Tailwind background and text utilities.",
     featured: true,
     icon: "code",
