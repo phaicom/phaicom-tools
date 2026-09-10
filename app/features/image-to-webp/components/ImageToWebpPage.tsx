@@ -32,6 +32,7 @@ export function ImageToWebpPage() {
   return (
     <div className="space-y-8">
       <PageIntro
+        category="Images"
         title="Image to WebP"
         description="Upload a batch of images, convert supported files to WebP, and download the results as a ZIP without leaving the page."
       />

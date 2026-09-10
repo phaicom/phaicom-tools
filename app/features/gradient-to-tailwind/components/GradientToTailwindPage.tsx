@@ -25,6 +25,7 @@ export function GradientToTailwindPage() {
   return (
     <div className="space-y-8">
       <PageIntro
+        category="Code & CSS"
         title="Gradient to Tailwind"
         description="Convert CSS gradients into concise Tailwind classes for backgrounds and text."
       />
@@ -99,7 +100,7 @@ function EditorField({
         spellCheck={false}
         className={({ isFocusVisible, isHovered }) =>
           cn(
-            "min-h-112 w-full resize-y rounded-sm bg-background px-5 py-4 font-mono text-sm leading-7 text-foreground shadow-none transition outline-none placeholder:text-muted-foreground/70",
+            "min-h-80 w-full resize-y rounded-sm bg-background px-4 py-4 font-mono text-sm leading-7 text-foreground shadow-none transition outline-none placeholder:text-muted-foreground/70 sm:min-h-112 sm:px-5",
             isHovered && "bg-card",
             isFocusVisible && "ring-2 ring-ring/20",
           )
@@ -131,7 +132,7 @@ function OutputPanel({
 
       <div
         className={cn(
-          "min-h-112 rounded-sm bg-background px-5 py-4 font-mono text-sm leading-7 whitespace-pre-wrap shadow-none",
+          "min-h-80 overflow-x-auto rounded-sm bg-background px-4 py-4 font-mono text-sm leading-7 [overflow-wrap:anywhere] whitespace-pre-wrap shadow-none sm:min-h-112 sm:px-5",
           error ? "text-destructive" : "text-foreground",
         )}
       >

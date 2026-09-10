@@ -1,3 +1,5 @@
+import { tools } from "@/shared/data/tools";
+
 export type DocsNavNode = {
   id: string;
   label: string;
@@ -17,29 +19,13 @@ type DocsPage = {
   path: string;
 };
 
-const docsPages = [
-  {
-    children: [],
-    id: "gradient-to-tailwind",
-    label: "Gradient to Tailwind",
-    path: "/docs/gradient-to-tailwind",
-    segment: "gradient-to-tailwind",
-  },
-  {
-    children: [],
-    id: "image-to-webp",
-    label: "Image to WebP",
-    path: "/docs/image-to-webp",
-    segment: "image-to-webp",
-  },
-  {
-    children: [],
-    id: "editor",
-    label: "HTML Editor",
-    path: "/docs/editor",
-    segment: "editor",
-  },
-] satisfies DocsNavNode[];
+const docsPages = tools.map((tool) => ({
+  children: [],
+  id: tool.path.split("/").at(-1) ?? tool.path,
+  label: tool.shortName,
+  path: tool.path,
+  segment: tool.path.split("/").at(-1) ?? "",
+})) satisfies DocsNavNode[];
 
 const docsPagesByPath = new Map<string, DocsPage>(
   docsPages.map(({ label, path }) => [path, { label, path }]),
@@ -80,8 +66,8 @@ export function getDocsBreadcrumbs(pathname: string) {
   if (normalizedPathname === "/docs") {
     return [
       {
-        label: "Docs",
-        path: "/docs",
+        label: "Tools overview",
+        path: "/tools",
         isCurrent: true,
       },
     ] satisfies DocsBreadcrumb[];
@@ -91,8 +77,8 @@ export function getDocsBreadcrumbs(pathname: string) {
 
   return [
     {
-      label: "Docs",
-      path: "/docs",
+      label: "All tools",
+      path: "/tools",
       isCurrent: false,
     },
     {

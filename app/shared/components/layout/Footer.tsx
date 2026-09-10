@@ -1,22 +1,34 @@
-import { HempConfetti } from "@/shared/components/misc/HempConfetti";
+import { Link } from "react-router";
 
 export const Footer = () => {
   return (
-    <footer className="mt-auto">
-      <div className="mx-auto flex h-14 w-full max-w-screen-2xl items-center justify-center px-4 md:px-6 xl:px-8">
-        <p className="flex flex-row items-center gap-1 text-sm text-muted-foreground">
-          Made with
-          <HempConfetti />
-          by
+    <footer className="mt-auto border-t border-border bg-card">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-7 sm:flex-row sm:items-center sm:justify-between md:px-6 xl:px-8">
+        <div>
+          <p className="text-sm font-semibold text-foreground">Phaicom Tools</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Focused utilities for everyday web work.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <Link to="/tools" className="text-muted-foreground no-underline hover:text-foreground">
+            All tools
+          </Link>
+          <Link
+            to="/#categories"
+            className="text-muted-foreground no-underline hover:text-foreground"
+          >
+            Categories
+          </Link>
           <a
-            href="https://github.com/phaicom"
+            href="https://github.com/phaicom/phaicom-tools"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline underline-offset-4 transition hover:text-foreground"
+            className="text-muted-foreground no-underline hover:text-foreground"
           >
-            Phaicom
+            GitHub
           </a>
-        </p>
+        </nav>
       </div>
     </footer>
   );

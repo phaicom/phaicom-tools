@@ -53,7 +53,7 @@ export function SelectedFilesTable({ items }: SelectedFilesTableProps) {
   return (
     <Table
       aria-label="Selected files for WebP conversion"
-      className="max-h-120 overflow-hidden border-0 bg-linear-to-b from-background via-background to-muted/20"
+      className="max-h-120 overflow-auto border-0 bg-linear-to-b from-background via-background to-muted/20 [&_[role=grid]]:min-w-[760px]"
     >
       <TableHeader className="h-12 border-b border-border/70 bg-muted/70 backdrop-blur">
         {header.map((label, i) => (

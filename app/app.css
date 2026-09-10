@@ -69,22 +69,22 @@
 }
 
 :root {
-  --background: oklch(0.985 0.01 300);
-  --foreground: oklch(0.23 0.03 285);
+  --background: oklch(0.985 0.004 286);
+  --foreground: oklch(0.22 0.025 282);
 
-  --card: oklch(0.995 0.006 300);
+  --card: oklch(0.997 0.002 286);
   --card-foreground: oklch(0.23 0.03 285);
 
   --popover: oklch(0.995 0.006 300);
   --popover-foreground: oklch(0.23 0.03 285);
 
-  --primary: oklch(0.58 0.2 300);
+  --primary: oklch(0.54 0.19 292);
   --primary-foreground: oklch(0.98 0.01 300);
 
-  --secondary: oklch(0.95 0.02 300);
+  --secondary: oklch(0.955 0.012 292);
   --secondary-foreground: oklch(0.32 0.04 290);
 
-  --muted: oklch(0.95 0.015 300);
+  --muted: oklch(0.95 0.008 286);
   --muted-foreground: oklch(0.53 0.03 290);
 
   --accent: oklch(0.92 0.03 310);
@@ -92,8 +92,8 @@
 
   --destructive: oklch(0.62 0.23 25);
 
-  --border: oklch(0.9 0.015 300);
-  --input: oklch(0.9 0.015 300);
+  --border: oklch(0.89 0.01 286);
+  --input: oklch(0.84 0.012 286);
   --ring: oklch(0.68 0.18 300);
 
   --chart-1: oklch(0.72 0.18 300);
@@ -102,7 +102,7 @@
   --chart-4: oklch(0.8 0.12 240);
   --chart-5: oklch(0.7 0.14 20);
 
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
   --sidebar: oklch(0.97 0.012 300);
   --sidebar-foreground: oklch(0.25 0.03 285);
@@ -178,16 +178,29 @@ html {
 
 body {
   @apply bg-background text-base leading-relaxed text-foreground;
-  background:
-    radial-gradient(circle at 15% 20%, var(--glow-primary), transparent 24%),
-    radial-gradient(circle at 85% 15%, var(--glow-accent), transparent 22%),
-    linear-gradient(180deg, var(--card) 0%, var(--background) 100%);
-  background-attachment: fixed;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  pre,
+  code {
+    overflow-wrap: anywhere;
   }
 
   code,
@@ -215,6 +228,17 @@ body {
 
   a {
     @apply text-primary hover:underline;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

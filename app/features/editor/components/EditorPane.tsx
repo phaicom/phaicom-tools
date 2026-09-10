@@ -44,7 +44,7 @@ export function EditorPane({ html, onChange }: EditorPaneProps) {
   return (
     <EditorPanel
       title="Editor"
-      className="h-full min-h-144"
+      className="h-full min-h-96 sm:min-h-144"
       contentClassName="html-editor-shell"
       headerContent={<EditorModeTabs mode={mode} onChange={setMode} />}
     >

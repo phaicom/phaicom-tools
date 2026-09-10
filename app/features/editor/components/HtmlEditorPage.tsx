@@ -18,6 +18,7 @@ export function HtmlEditorPage() {
   return (
     <div className="flex h-full min-h-0 flex-col gap-5">
       <PageIntro
+        category="Writing"
         title="HTML Editor"
         description="Compose rich text with TipTap on the left and preview the live HTML output on the right. The app stores and shares a single HTML document end to end."
       />
@@ -61,7 +62,7 @@ export function HtmlEditorPage() {
       <div className="flex flex-1 flex-col gap-4">
         <section className="grid gap-4 min-[1500px]:grid-cols-2">
           <EditorPane html={html} onChange={updateHtml} />
-          <HtmlSourcePane html={deferredHtml} className="h-full min-h-144" />
+          <HtmlSourcePane html={deferredHtml} className="h-full min-h-96 sm:min-h-144" />
         </section>
       </div>
     </div>

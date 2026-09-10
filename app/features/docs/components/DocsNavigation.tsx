@@ -126,11 +126,9 @@ export function DocsNavigation({ pathname, onNavigate, className }: DocsNavigati
     <nav className={className} aria-label="Documentation">
       <div className="mb-4">
         <p className="text-xs font-semibold tracking-[0.24em] text-sidebar-foreground/45 uppercase">
-          Documentation
+          Tools
         </p>
-        <p className="mt-2 text-sm text-sidebar-foreground/70">
-          Browse every route under <code>/docs</code>.
-        </p>
+        <p className="mt-2 text-sm text-sidebar-foreground/70">Jump directly to any utility.</p>
       </div>
 
       <Tree
